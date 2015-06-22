@@ -1,0 +1,3 @@
+= Redhopper
+
+Kanban boards for Redmine, inspired by *Jira Agile* (formerly known as *Greenhopper*), but following its own path.
