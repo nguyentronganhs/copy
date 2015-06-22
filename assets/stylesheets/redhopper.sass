@@ -1,0 +1,28 @@
+=space($margin, $padding: $margin)
+	margin: $margin
+	padding: $padding
+
+ol.kanban
+	+space(0)
+
+	display: flex
+	flex-direction: row
+	justify-content: center
+	list-style: none
+	text-align: center
+
+	& > li
+		+space(0)
+
+		ol
+			+space(0)
+
+			list-style: none
+			width: 20em
+
+			li
+				+space(1em)
+
+				background-color: lightgray
+				border-radius: 2px
+				box-shadow: 0 1px 1px 0 darken(lightgray, 50%)

@@ -1,9 +1,12 @@
 %h2 Kanbans
 
-%ol
+%ol.kanban
 	- @issue_statuses.each do |status|
 		%li
-			= status.name
+			%h3= status.name
 			%ol
 				- @issues_by_status[status].each do |issue|
 					%li= link_to issue.subject, issue
+
+- content_for :header_tags do
+	= stylesheet_link_tag 'redhopper', :plugin => 'redhopper'
