@@ -1,4 +1,4 @@
-$gutter: 0.5em
+$gutter: 1em
 
 =space($margin, $padding: $margin)
 	margin: $margin
@@ -25,6 +25,13 @@ ol.kanban
 			li
 				margin: $gutter 0
 
+				table
+					display: block
+					width: 100%
+
+				tbody
+					display: block
+
 				tr
 					+space(0)
 
@@ -35,8 +42,11 @@ ol.kanban
 
 					td
 						+space(0, $gutter)
-						$shift: -2 * $gutter
+
+						display: block
 
 						input[type=checkbox]
+							$shift: -$gutter
+
 							float: left
 							margin: $shift 0 0 $shift

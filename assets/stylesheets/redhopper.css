@@ -7,14 +7,19 @@ ol.kanban {
   overflow: scroll;
   text-align: center; }
   ol.kanban > li {
-    margin: 0 0.5em; }
+    margin: 0 1em; }
     ol.kanban > li ol {
       margin: 0;
       padding: 0;
       list-style: none;
       width: 20em; }
       ol.kanban > li ol li {
-        margin: 0.5em 0; }
+        margin: 1em 0; }
+        ol.kanban > li ol li table {
+          display: block;
+          width: 100%; }
+        ol.kanban > li ol li tbody {
+          display: block; }
         ol.kanban > li ol li tr {
           margin: 0;
           padding: 0;
@@ -24,7 +29,8 @@ ol.kanban {
           display: block; }
           ol.kanban > li ol li tr td {
             margin: 0;
-            padding: 0.5em; }
+            padding: 1em;
+            display: block; }
             ol.kanban > li ol li tr td input[type=checkbox] {
               float: left;
               margin: -1em 0 0 -1em; }
