@@ -18,7 +18,7 @@
 									%tr.hascontextmenu
 										%td
 											%input{type: "checkbox", name: "ids[]", value: issue.id}
-											= issue.subject
+											= link_to issue.subject, issue
 
 - content_for :header_tags do
 	= stylesheet_link_tag 'redhopper', :plugin => 'redhopper'
