@@ -9,7 +9,7 @@ class KanbansController < ApplicationController
     end
 
     @project = Project.find(params[:project_id])
-    @issues_by_status = Issue.visible(User.current, :project => @project).inject(empty_issues_by_status) do |result, issue|
+    @issues_by_status = Issue.visible(User.current, :project => @project).where(tracker: Setting.plugin_redhopper["displayed_tracker_ids"]).inject(empty_issues_by_status) do |result, issue|
       result[issue.status] << issue
       result
     end
