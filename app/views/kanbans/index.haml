@@ -3,7 +3,9 @@
 %ol.kanban
 	- @issue_statuses.each do |status|
 		%li
-			%h3= status.name
+			%h3
+				= status.name
+				%small{title: "Issues count"}= "(#{@issues_by_status[status].length})"
 			%ol
 				- @issues_by_status[status].each do |issue|
 					%li= link_to issue.subject, issue
