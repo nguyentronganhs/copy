@@ -11,4 +11,6 @@ Redmine::Plugin.register :redhopper do
   end
 
   menu :project_menu, :kanbans, { :controller => 'kanbans', :action => 'index' }, :caption => 'Kanbans', :after => :activity, :param => :project_id
+
+  settings :partial => 'settings/kanbans'
 end
