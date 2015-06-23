@@ -24,6 +24,8 @@
 													%span.icon.icon-comment{title: "Notes count"}= notes.count
 												- unless issue.attachments.empty?
 													%span.icon.icon-attachment{title: "Attachments count"}= issue.attachments.count
+												- unless issue.assigned_to.nil?
+													%span.icon.icon-user{title: "Assigned user."}= link_to_user(issue.assigned_to)
 												- unless issue.description.blank?
 													%span.icon.icon-issue{title: "Description filled in."} &nbsp;
 
