@@ -7,18 +7,26 @@ ol.kanban {
   overflow: scroll;
   text-align: center; }
   ol.kanban > li {
-    margin: 0;
-    padding: 0; }
+    margin: 0 0.5em; }
     ol.kanban > li ol {
       margin: 0;
       padding: 0;
       list-style: none;
       width: 20em; }
       ol.kanban > li ol li {
-        margin: 1em;
-        padding: 1em;
-        background-color: lightgray;
-        border-radius: 2px;
-        box-shadow: 0 1px 1px 0 #535353; }
+        margin: 0.5em 0; }
+        ol.kanban > li ol li tr {
+          margin: 0;
+          padding: 0;
+          background-color: lightgray;
+          border-radius: 2px;
+          box-shadow: 0 1px 1px 0 #535353;
+          display: block; }
+          ol.kanban > li ol li tr td {
+            margin: 0;
+            padding: 0.5em; }
+            ol.kanban > li ol li tr td input[type=checkbox] {
+              float: left;
+              margin: -1em 0 0 -1em; }
 
 /*# sourceMappingURL=redhopper.css.map */
