@@ -22,6 +22,8 @@
 											.extras
 												- unless (notes = issue.journals.select { |journal| !journal.notes.blank? }).empty?
 													%span.icon.icon-comment{title: "Notes count"}= notes.count
+												- unless issue.attachments.empty?
+													%span.icon.icon-attachment{title: "Attachments count"}= issue.attachments.count
 
 - content_for :header_tags do
 	= stylesheet_link_tag 'redhopper', :plugin => 'redhopper'
