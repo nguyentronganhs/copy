@@ -1,0 +1,8 @@
+%table
+  %tbody
+    %tr
+      %th Displayed trackers
+      %td
+        - Tracker.sorted.each do |tracker|
+          = check_box_tag "settings[displayed_tracker_ids][]", tracker.id, Setting.plugin_redhopper["displayed_tracker_ids"].include?(tracker.id.to_s)
+          = tracker.name
