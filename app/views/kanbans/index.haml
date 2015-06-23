@@ -19,6 +19,9 @@
 										%td
 											%input{type: "checkbox", name: "ids[]", value: issue.id}
 											= link_to "##{issue.id} #{issue.subject}", issue
+											.extras
+												- unless (notes = issue.journals.select { |journal| !journal.notes.blank? }).empty?
+													%span.icon.icon-comment{title: "Notes count"}= notes.count
 
 - content_for :header_tags do
 	= stylesheet_link_tag 'redhopper', :plugin => 'redhopper'
