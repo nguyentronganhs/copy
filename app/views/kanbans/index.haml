@@ -9,7 +9,7 @@
 					%small{title: "Issues count"} (#{@issues_by_status[status].length})
 				%ol
 					- @issues_by_status[status].each do |issue|
-						%li
+						%li{draggable: "true", dropzone: "move"}
 							/
 								Redmine needs a tr for its contextual menu.
 								So here is the whole table package…
@@ -31,5 +31,6 @@
 
 - content_for :header_tags do
 	= stylesheet_link_tag 'redhopper', :plugin => 'redhopper'
+	= javascript_include_tag 'redhopper', :plugin => 'redhopper'
 
 = context_menu issues_context_menu_path

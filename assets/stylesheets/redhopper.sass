@@ -25,6 +25,12 @@ ol.kanban
 			li
 				margin: $gutter 0
 
+				&.dragover
+					border-width: 2px 0 0 0
+					border-color: red
+					border-style: solid
+					padding-top: $gutter
+
 				table
 					display: block
 					width: 100%
@@ -50,3 +56,13 @@ ol.kanban
 
 							float: left
 							margin: $shift 0 0 $shift
+
+	/* Prevent the text contents of draggable elements from being selectable. */
+	[draggable]
+		-moz-user-select: none
+		-khtml-user-select: none
+		-webkit-user-select: none
+		user-select: none
+		/* Required to make elements draggable in old WebKit */
+		-khtml-user-drag: element
+		-webkit-user-drag: element
