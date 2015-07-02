@@ -41,7 +41,7 @@ ol.kanban
 				tr
 					+space(0)
 
-					background-color: lightgray
+					background-color: lighten(lightgray, 10%)
 					border-radius: 2px
 					box-shadow: 0 1px 1px 0 darken(lightgray, 50%)
 					display: block
@@ -51,11 +51,29 @@ ol.kanban
 
 						display: block
 
+						$shift: -$gutter
 						input[type=checkbox]
-							$shift: -$gutter
-
 							float: left
 							margin: $shift 0 0 $shift
+
+						.unsortable
+							margin-top: $shift
+							margin-bottom: $gutter
+
+						.sortable
+							float: left
+							margin-left: $shift * 1.5
+							width: 10%
+
+						.meta-data
+							float: right
+							margin-right: $shift
+							width: 10%
+
+						&:after
+							content: ""
+							display: table
+							clear: both
 
 	/* Prevent the text contents of draggable elements from being selectable. */
 	[draggable]

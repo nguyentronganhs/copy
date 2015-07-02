@@ -1,10 +1,5 @@
 GEM
   specs:
-<<<<<<< HEAD
-    haml (4.0.6)
-      tilt
-    sass (3.4.15)
-=======
     activemodel (4.2.1)
       activesupport (= 4.2.1)
       builder (~> 3.1)
@@ -29,7 +24,6 @@ GEM
       activerecord (~> 4)
     sass (3.4.15)
     thread_safe (0.3.5)
->>>>>>> Introducing linked lists for issues. refs #1632
     tilt (1.4.1)
 
 PLATFORMS
@@ -37,8 +31,5 @@ PLATFORMS
 
 DEPENDENCIES
   haml (~> 4.0.6)
-<<<<<<< HEAD
-=======
   resort (~> 0.5.0)
->>>>>>> Introducing linked lists for issues. refs #1632
   sass (~> 3.4.15)

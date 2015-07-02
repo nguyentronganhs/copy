@@ -29,7 +29,7 @@ ol.kanban {
         ol.kanban > li ol li tr {
           margin: 0;
           padding: 0;
-          background-color: lightgray;
+          background-color: #ededed;
           border-radius: 2px;
           box-shadow: 0 1px 1px 0 #545454;
           display: block; }
@@ -40,6 +40,21 @@ ol.kanban {
             ol.kanban > li ol li tr td input[type=checkbox] {
               float: left;
               margin: -1em 0 0 -1em; }
+            ol.kanban > li ol li tr td .unsortable {
+              margin-top: -1em;
+              margin-bottom: 1em; }
+            ol.kanban > li ol li tr td .sortable {
+              float: left;
+              margin-left: -1.5em;
+              width: 10%; }
+            ol.kanban > li ol li tr td .meta-data {
+              float: right;
+              margin-right: -1em;
+              width: 10%; }
+            ol.kanban > li ol li tr td:after {
+              content: "";
+              display: table;
+              clear: both; }
   ol.kanban [draggable] {
     -moz-user-select: none;
     -khtml-user-select: none;
