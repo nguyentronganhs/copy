@@ -6,10 +6,33 @@
 			%li
 				%h3
 					= status.name
-					%small{title: "Issues count"} (#{@issues_by_status[status].length})
+					%small{title: "Issues count"} (#{@issues_by_status[status][:sorted].length + @issues_by_status[status][:unsorted].length})
+				%h4 Sorted
 				%ol
-					- @issues_by_status[status].each do |issue|
-						%li{draggable: "true", dropzone: "move"}
+					- @issues_by_status[status][:sorted].each do |issue|
+						%li
+							/
+								Redmine needs a tr for its contextual menu.
+								So here is the whole table package…
+							%table
+								%tbody
+									%tr.hascontextmenu
+										%td
+											%input{type: "checkbox", name: "ids[]", value: issue.id}
+											= link_to "##{issue.id} #{issue.subject}", issue
+											.extras
+												- unless (notes = issue.journals.select { |journal| !journal.notes.blank? }).empty?
+													%span.icon.icon-comment{title: "Notes count"}= notes.count
+												- unless issue.attachments.empty?
+													%span.icon.icon-attachment{title: "Attachments count"}= issue.attachments.count
+												- unless issue.assigned_to.nil?
+													%span.icon.icon-user{title: "Assigned user."}= link_to_user(issue.assigned_to)
+												- unless issue.description.blank?
+													%span.icon.icon-issue{title: "Description filled in."} &nbsp;
+				%h4 Unsorted
+				%ol
+					- @issues_by_status[status][:unsorted].each do |issue|
+						%li
 							/
 								Redmine needs a tr for its contextual menu.
 								So here is the whole table package…
