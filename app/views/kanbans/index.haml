@@ -10,6 +10,7 @@
 				%h4 Sorted
 				%ol
 					- first_issue = @issues_by_status[status][:sorted].first
+					- last_issue = @issues_by_status[status][:sorted].last
 					- @issues_by_status[status][:sorted].each_with_index do |issue, index|
 						%li
 							/
@@ -21,11 +22,12 @@
 										%td
 											%input{type: "checkbox", name: "ids[]", value: issue.id}
 											.sortable
-												= link_to (tag :img, src: '/images/2uparrow.png', alt: "Move to top arrow"), move_up_redhopper_issue_path(issue_id: issue.id, insert_before_id: first_issue.id), method: :post, title: "Move to top" unless first_issue == issue
+												= link_to (tag :img, src: '/images/2uparrow.png', alt: "Move to top arrow"), move_redhopper_issue_path(issue_id: issue.id, target_issue_id: first_issue.id, insert: "before"), method: :post, title: "Move to top" unless first_issue == issue
 												- previous_issue = index == 0 ? nil : @issues_by_status[status][:sorted][index - 1]
-												= link_to (tag :img, src: '/images/1uparrow.png', alt: "Move up arrow"), move_up_redhopper_issue_path(issue_id: issue.id, insert_before_id: previous_issue.id), method: :post, title: "Move up" unless previous_issue.nil?
+												= link_to (tag :img, src: '/images/1uparrow.png', alt: "Move up arrow"), move_redhopper_issue_path(issue_id: issue.id, target_issue_id: previous_issue.id, insert: "before"), method: :post, title: "Move up" unless previous_issue.nil?
 												- next_issue = @issues_by_status[status][:sorted][index + 1]
-												= link_to (tag :img, src: '/images/1downarrow.png', alt: "Move down arrow"), move_up_redhopper_issue_path(issue_id: next_issue.id, insert_before_id: issue.id), method: :post, title: "Move down" unless next_issue.nil?
+												= link_to (tag :img, src: '/images/1downarrow.png', alt: "Move down arrow"), move_redhopper_issue_path(issue_id: issue.id, target_issue_id: next_issue.id, insert: "after"), method: :post, title: "Move down" unless next_issue.nil?
+												= link_to (tag :img, src: '/images/2downarrow.png', alt: "Move to bottom arrow"), move_redhopper_issue_path(issue_id: issue.id, target_issue_id: last_issue.id, insert: "after"), method: :post, title: "Move to bottom" unless last_issue == issue
 											.meta-data
 												- unless (notes = issue.journals.select { |journal| !journal.notes.blank? }).empty?
 													.icon.icon-comment{title: "#{notes.count} notes."} &nbsp;
