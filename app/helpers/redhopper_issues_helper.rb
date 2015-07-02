@@ -1,0 +1,2 @@
+module RedhopperIssuesHelper
+end
