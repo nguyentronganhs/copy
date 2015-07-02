@@ -9,6 +9,7 @@
 					%small{title: "Issues count"} (#{@issues_by_status[status][:sorted].length + @issues_by_status[status][:unsorted].length})
 				%h4 Sorted
 				%ol
+					- previous_issue_id = nil
 					- @issues_by_status[status][:sorted].each do |issue|
 						%li
 							/
@@ -29,6 +30,8 @@
 													%span.icon.icon-user{title: "Assigned user."}= link_to_user(issue.assigned_to)
 												- unless issue.description.blank?
 													%span.icon.icon-issue{title: "Description filled in."} &nbsp;
+											= link_to 'Move up', move_up_redhopper_issue_path(issue_id: issue.id, insert_before_id: previous_issue_id), method: :post unless previous_issue_id.nil?
+											- previous_issue_id = issue.id
 				%h4 Unsorted
 				%ol
 					- @issues_by_status[status][:unsorted].each do |issue|
