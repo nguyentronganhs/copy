@@ -51,6 +51,7 @@
 													%span.icon.icon-user{title: "Assigned user."}= link_to_user(issue.assigned_to)
 												- unless issue.description.blank?
 													%span.icon.icon-issue{title: "Description filled in."} &nbsp;
+											= link_to 'Move to sorted section', create_redhopper_issue_path(issue_id: issue.id), method: :post
 
 - content_for :header_tags do
 	= stylesheet_link_tag 'redhopper', :plugin => 'redhopper'
