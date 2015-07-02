@@ -9,8 +9,7 @@
 					%small{title: "Issues count"} (#{@issues_by_status[status][:sorted].length + @issues_by_status[status][:unsorted].length})
 				%h4 Sorted
 				%ol
-					- previous_issue_id = nil
-					- @issues_by_status[status][:sorted].each do |issue|
+					- @issues_by_status[status][:sorted].each_with_index do |issue, index|
 						%li
 							/
 								Redmine needs a tr for its contextual menu.
@@ -21,8 +20,10 @@
 										%td
 											%input{type: "checkbox", name: "ids[]", value: issue.id}
 											.sortable
-												= link_to (tag :img, src: '/images/1uparrow.png', alt: "Move up arrow"), move_up_redhopper_issue_path(issue_id: issue.id, insert_before_id: previous_issue_id), method: :post, title: "Move up" unless previous_issue_id.nil?
-												- previous_issue_id = issue.id
+												- previous_issue = index == 0 ? nil : @issues_by_status[status][:sorted][index - 1]
+												- next_issue = @issues_by_status[status][:sorted][index + 1]
+												= link_to (tag :img, src: '/images/1uparrow.png', alt: "Move up arrow"), move_up_redhopper_issue_path(issue_id: issue.id, insert_before_id: previous_issue.id), method: :post, title: "Move up" unless previous_issue.nil?
+												= link_to (tag :img, src: '/images/1downarrow.png', alt: "Move down arrow"), move_up_redhopper_issue_path(issue_id: next_issue.id, insert_before_id: issue.id), method: :post, title: "Move down" unless next_issue.nil?
 											.meta-data
 												- unless (notes = issue.journals.select { |journal| !journal.notes.blank? }).empty?
 													.icon.icon-comment{title: "#{notes.count} notes."} &nbsp;
