@@ -9,7 +9,8 @@
 					%small{title: "Issues count"} (#{@issues_by_status[status][:sorted].length + @issues_by_status[status][:unsorted].length})
 				%h4 Sorted
 				%ol
-					- first_issue = @issues_by_status[status][:sorted].first
+					- if first_issue = @issues_by_status[status][:sorted].first
+						%hr{id: "issue-#{first_issue.id}-before"}
 					- last_issue = @issues_by_status[status][:sorted].last
 					= render partial: 'issue', collection: @issues_by_status[status][:sorted], locals: { sortable: true, status: status, first_issue: first_issue, last_issue: last_issue }
 
@@ -19,5 +20,6 @@
 
 - content_for :header_tags do
 	= stylesheet_link_tag 'redhopper', :plugin => 'redhopper'
+	= javascript_include_tag 'redhopper', :plugin => 'redhopper'
 
 = context_menu issues_context_menu_path

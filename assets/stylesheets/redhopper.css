@@ -5,7 +5,8 @@ ol.kanban {
   flex-direction: row;
   list-style: none;
   overflow: scroll;
-  text-align: center; }
+  text-align: center;
+  /* Prevent the text contents of draggable elements from being selectable. */ }
   ol.kanban > li {
     margin: 0 1em; }
     ol.kanban > li ol {
@@ -14,7 +15,7 @@ ol.kanban {
       list-style: none;
       width: 20em; }
       ol.kanban > li ol li {
-        margin: 1em 0; }
+        margin: 0; }
         ol.kanban > li ol li table {
           display: block;
           width: 100%; }
@@ -49,5 +50,22 @@ ol.kanban {
               content: "";
               display: table;
               clear: both; }
+      ol.kanban > li ol hr {
+        background-color: transparent;
+        border: 2px dashed transparent;
+        border-radius: 5px;
+        height: 1em; }
+        ol.kanban > li ol hr[dropzone=move] {
+          border-color: lightgray; }
+        ol.kanban > li ol hr.dragover {
+          background-color: lightgray; }
+  ol.kanban [draggable] {
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    /* Required to make elements draggable in old WebKit */
+    -khtml-user-drag: element;
+    -webkit-user-drag: element; }
 
 /*# sourceMappingURL=redhopper.css.map */
