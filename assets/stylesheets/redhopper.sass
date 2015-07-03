@@ -23,13 +23,7 @@ ol.kanban
 			width: 20em
 
 			li
-				margin: $gutter 0
-
-				&.dragover
-					border-width: 2px 0 0 0
-					border-color: red
-					border-style: solid
-					padding-top: $gutter
+				margin: 0
 
 				table
 					display: block
@@ -74,6 +68,18 @@ ol.kanban
 							content: ""
 							display: table
 							clear: both
+
+			hr
+				background-color: transparent
+				border: 2px dashed transparent
+				border-radius: 5px
+				height: $gutter
+
+				&[dropzone=move]
+					border-color: lightgray
+
+				&.dragover
+					background-color: lightgray
 
 	/* Prevent the text contents of draggable elements from being selectable. */
 	[draggable]
