@@ -1,0 +1,30 @@
+%li
+	/
+		Redmine needs a tr for its contextual menu.
+		So here is the whole table package…
+	%table
+		%tbody
+			%tr.hascontextmenu
+				%td
+					%input{type: "checkbox", name: "ids[]", value: issue.id}
+					- if (sortable ||= false)
+						.sortable
+							= link_to (tag :img, src: '/images/2uparrow.png', alt: "Move to top arrow"), move_redhopper_issue_path(issue_id: issue.id, target_issue_id: first_issue.id, insert: "before"), method: :post, title: "Move to top" unless first_issue == issue
+							- previous_issue = issue_counter == 0 ? nil : @issues_by_status[status][:sorted][issue_counter - 1]
+							= link_to (tag :img, src: '/images/1uparrow.png', alt: "Move up arrow"), move_redhopper_issue_path(issue_id: issue.id, target_issue_id: previous_issue.id, insert: "before"), method: :post, title: "Move up" unless previous_issue.nil?
+							- next_issue = @issues_by_status[status][:sorted][issue_counter + 1]
+							= link_to (tag :img, src: '/images/1downarrow.png', alt: "Move down arrow"), move_redhopper_issue_path(issue_id: issue.id, target_issue_id: next_issue.id, insert: "after"), method: :post, title: "Move down" unless next_issue.nil?
+							= link_to (tag :img, src: '/images/2downarrow.png', alt: "Move to bottom arrow"), move_redhopper_issue_path(issue_id: issue.id, target_issue_id: last_issue.id, insert: "after"), method: :post, title: "Move to bottom" unless last_issue == issue
+					- else
+						.unsortable
+							= link_to 'Move to sorted section', create_redhopper_issue_path(issue_id: issue.id), method: :post
+					.meta-data
+						- unless (notes = issue.journals.select { |journal| !journal.notes.blank? }).empty?
+							.icon.icon-comment{title: "#{notes.count} notes."} &nbsp;
+						- unless issue.attachments.empty?
+							.icon.icon-attachment{title: "#{issue.attachments.count} attachments."} &nbsp;
+						- unless issue.assigned_to.nil?
+							.icon.icon-user{title: "Assigned to #{issue.assigned_to}."} &nbsp;
+						- unless issue.description.blank?
+							.icon.icon-issue{title: "Description filled in."} &nbsp;
+					= link_to "##{issue.id} #{issue.subject}", issue
