@@ -41,32 +41,33 @@ ol.kanban
 					display: block
 
 					td
-						+space(0, $gutter)
+						+space(0)
 
 						display: block
 
-						$shift: -$gutter
 						input[type=checkbox]
 							float: left
-							margin: $shift 0 0 $shift
+							margin: 0 0 $gutter
 
-						.unsortable
-							margin-top: $shift
-							margin-bottom: $gutter
+						.unsortable, .sortable
+							float: right
 
-						.sortable
+						p
+							clear: both
+							margin: 0 0 $gutter
+
+						.issue-id
 							float: left
-							margin-left: $shift * 1.5
-							width: 10%
 
 						.meta-data
 							float: right
-							margin-right: $shift
-							width: 10%
+
+							span
+								margin: 0 0 0 $gutter
 
 						&:after
 							content: ""
-							display: table
+							display: block
 							clear: both
 
 			hr
