@@ -19,3 +19,9 @@
         - name = "issue_meta-data_on_card"
         = check_box_tag "settings[features][#{name}]", true, Feature.enabled(name)
       %td Displays hints about issue details like the assigned user or attachments count directly on the card so that you don't have to go to the details page.
+    %tr
+      %th Move issue back to unsorted section
+      %td
+        - name = "move_back_to_unsorted"
+        = check_box_tag "settings[features][#{name}]", true, Feature.enabled(name)
+      %td A sorted issue has so few valid reasons to go back to the unsorted section that we decided to disable this feature on purpose. Activate it wisely.

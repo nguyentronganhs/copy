@@ -16,7 +16,8 @@
 							- next_issue = @issues_by_status[status][:sorted][issue_counter + 1]
 							= link_to (tag :img, src: '/images/1downarrow.png', alt: "Move down arrow"), move_redhopper_issue_path(issue_id: issue.id, target_issue_id: next_issue.id, insert: "after"), method: :post, title: "Move down" unless next_issue.nil?
 							= link_to (tag :img, src: '/images/2downarrow.png', alt: "Move to bottom arrow"), move_redhopper_issue_path(issue_id: issue.id, target_issue_id: last_issue.id, insert: "after"), method: :post, title: "Move to bottom" unless last_issue == issue
-							= link_to (tag :img, src: '/images/bullet_diamond.png', alt: "Move back to unsorted section"), delete_redhopper_issue_path(issue_id: issue.id), method: :delete, title: "Move back to unsorted section"
+							- if Feature.enabled "move_back_to_unsorted"
+								= link_to (tag :img, src: '/images/bullet_diamond.png', alt: "Move back to unsorted section"), delete_redhopper_issue_path(issue_id: issue.id), method: :delete, title: "Move back to unsorted section"
 					- else
 						.unsortable
 							= link_to 'Move to sorted section', create_redhopper_issue_path(issue_id: issue.id), method: :post
