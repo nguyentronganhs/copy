@@ -25,4 +25,12 @@ class RedhopperIssuesController < ApplicationController
     redirect_to project_kanbans_path(issue_to_move.issue.project)
   end
 
+  def delete
+    issue_to_delete = RedhopperIssue.where(issue_id: params[:issue_id]).first
+    project = issue_to_delete.issue.project
+
+    issue_to_delete.destroy
+
+    redirect_to project_kanbans_path(project)
+  end
 end
