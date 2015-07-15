@@ -2,7 +2,11 @@ class KanbansController < ApplicationController
   unloadable
 
   def index
-    @issue_statuses = IssueStatus.sorted
+    @project = Project.find(params[:project_id])
+
+    kanban_board = KanbanBoard.new
+
+    @issue_statuses = kanban_board.columns
     @issues_by_status = @issue_statuses.inject({}) do |result, issue_status|
       result[issue_status] = {
         sorted: [],
@@ -11,7 +15,6 @@ class KanbansController < ApplicationController
       result
     end
 
-    @project = Project.find(params[:project_id])
     project_issues = Issue.visible(User.current, :project => @project)
     if Setting.plugin_redhopper
       project_issues = project_issues.where(tracker: Setting.plugin_redhopper["displayed_tracker_ids"])

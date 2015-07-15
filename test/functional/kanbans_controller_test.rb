@@ -15,6 +15,8 @@ class KanbansControllerTest < ActionController::TestCase
 
 		assert_response :success
 		assert_template 'index'
+
+		assert_not_nil assigns['issue_statuses']
 		assert_not_nil assigns['issues_by_status']
 	end
 end
