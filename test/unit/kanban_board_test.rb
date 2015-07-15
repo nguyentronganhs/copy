@@ -10,10 +10,10 @@ class KanbanBoardTest < ActiveSupport::TestCase
     @done = IssueStatus.create!(name: 'Done')
     @doing.move_lower && @todo.reload && @doing.reload
 
-    @kanban_board = KanbanBoard.new
+    @kanban_board = KanbanBoard.new Project.create!(name: 'Test Project', identifier: 'test-project')
   end
 
-  test ".initialize" do
+  test ".initialize with project" do
     assert_not_nil @kanban_board
   end
 
