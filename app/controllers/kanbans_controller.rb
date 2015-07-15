@@ -6,7 +6,7 @@ class KanbansController < ApplicationController
 
     kanban_board = KanbanBoard.new
 
-    @issue_statuses = kanban_board.columns
+    @issue_statuses = kanban_board.columns.map { |column| column.issue_status }
     @issues_by_status = @issue_statuses.inject({}) do |result, issue_status|
       result[issue_status] = {
         sorted: [],

@@ -10,21 +10,21 @@ class KanbanBoardTest < ActiveSupport::TestCase
     assert_not_nil @kanban_board
   end
 
-  test ".columns returns all the issue statuses sorted" do
+  test ".columns returns all the issue statuses sorted wrapped in columns" do
     # Given
     IssueStatus.delete_all
     doing = IssueStatus.create!(name: 'Doing')
     todo = IssueStatus.create!(name: 'To do')
     done = IssueStatus.create!(name: 'Done')
-    doing.move_lower
-
-    issue_statuses = [todo, doing, done]
+    doing.move_lower && todo.reload && doing.reload
 
     # When
-    columns = @kanban_board.columns
+    result = @kanban_board.columns
 
     # Then
-    assert_equal issue_statuses, columns
+    [todo, doing, done].each_with_index do |status, index|
+      assert_equal status, result[index].issue_status
+    end
   end
 
 end
