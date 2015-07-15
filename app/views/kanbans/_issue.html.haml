@@ -11,9 +11,9 @@
 					- if sortable
 						.sortable
 							= link_to (tag :img, src: '/images/2uparrow.png', alt: "Move to top arrow"), move_redhopper_issue_path(issue_id: issue.id, target_issue_id: first_issue.id, insert: "before"), method: :post, title: "Move to top" unless first_issue == issue
-							- previous_issue = issue_counter == 0 ? nil : @issues_by_status[status][:sorted][issue_counter - 1]
+							- previous_issue = issue_counter == 0 ? nil : column.sorted_issues[issue_counter - 1]
 							= link_to (tag :img, src: '/images/1uparrow.png', alt: "Move up arrow"), move_redhopper_issue_path(issue_id: issue.id, target_issue_id: previous_issue.id, insert: "before"), method: :post, title: "Move up" unless previous_issue.nil?
-							- next_issue = @issues_by_status[status][:sorted][issue_counter + 1]
+							- next_issue = column.sorted_issues[issue_counter + 1]
 							= link_to (tag :img, src: '/images/1downarrow.png', alt: "Move down arrow"), move_redhopper_issue_path(issue_id: issue.id, target_issue_id: next_issue.id, insert: "after"), method: :post, title: "Move down" unless next_issue.nil?
 							= link_to (tag :img, src: '/images/2downarrow.png', alt: "Move to bottom arrow"), move_redhopper_issue_path(issue_id: issue.id, target_issue_id: last_issue.id, insert: "after"), method: :post, title: "Move to bottom" unless last_issue == issue
 							- if Feature.enabled "move_back_to_unsorted"

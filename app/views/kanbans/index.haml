@@ -2,21 +2,21 @@
 
 %form
 	%ol.kanban
-		- @issue_statuses.each do |status|
+		- @kanban_board.columns.each do |column|
 			%li
 				%h3
-					= status.name
-					%small{title: "Issues count"} (#{@issues_by_status[status][:sorted].length + @issues_by_status[status][:unsorted].length})
+					= column.issue_status.name
+					%small{title: "Issues count"} (#{column.sorted_issues.length + column.unsorted_issues.length})
 				%h4 Sorted
 				%ol
-					- if first_issue = @issues_by_status[status][:sorted].first
+					- if first_issue = column.sorted_issues.first
 						%hr{id: "issue-#{first_issue.id}-before"}
-					- last_issue = @issues_by_status[status][:sorted].last
-					= render partial: 'issue', collection: @issues_by_status[status][:sorted], locals: { sortable: true, status: status, first_issue: first_issue, last_issue: last_issue }
+					- last_issue = column.sorted_issues.last
+					= render partial: 'issue', collection: column.sorted_issues, locals: { sortable: true, column: column, first_issue: first_issue, last_issue: last_issue }
 
 				%h4 Unsorted
 				%ol
-					= render partial: 'issue', collection: @issues_by_status[status][:unsorted]
+					= render partial: 'issue', collection: column.unsorted_issues
 
 - content_for :header_tags do
 	= stylesheet_link_tag 'redhopper', :plugin => 'redhopper'
