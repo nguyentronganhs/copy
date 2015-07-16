@@ -5,6 +5,7 @@ test:
     - mkdir redmine-3.0.4/plugins/redhopper
     - tar -c --exclude redmine-3.0.4 * | tar -x -C redmine-3.0.4/plugins/redhopper
     - cd redmine-3.0.4
+    - echo "test:\n  adapter: sqlite3\n  database: db/test.sqlite3" > config/database.yml
     - gem install bundler
     - bundle install
     - bundle exec rake redmine:plugins:test
