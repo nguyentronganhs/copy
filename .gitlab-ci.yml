@@ -8,6 +8,6 @@ test:
     - 'echo -e "test:\n  adapter: sqlite3\n  database: db/test.sqlite3" > config/database.yml'
     - gem install bundler
     - bundle install
-    - RAILS_ENV=test bundle exec rake redmine:plugins:test
+    - RAILS_ENV=test bundle exec rake db:migrate redmine:plugins:migrate redmine:plugins:test
   tags:
     - ruby
