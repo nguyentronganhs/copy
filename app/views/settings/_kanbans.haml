@@ -25,3 +25,9 @@
         - name = "move_back_to_unsorted"
         = check_box_tag "settings[features][#{name}]", true, Feature.enabled(name)
       %td A sorted issue has so few valid reasons to go back to the unsorted section that we decided to disable this feature on purpose. Activate it wisely.
+    %tr
+      %th Only necessary columns
+      %td
+        - name = "only_necessary_columns"
+        = check_box_tag "settings[features][#{name}]", true, Feature.enabled(name)
+      %td Only displays columns used by the project's trackers.
