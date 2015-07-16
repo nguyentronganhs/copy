@@ -1,0 +1,12 @@
+test:
+  script:
+    - curl -O http://www.redmine.org/releases/redmine-3.0.4.tar.gz
+    - tar xf redmine-3.0.4.tar.gz
+    - mkdir redmine-3.0.4/plugins/redhopper
+    - tar -c --exclude redmine-3.0.4 * | tar -x -C redmine-3.0.4/plugins/redhopper
+    - cd redmine-3.0.4
+    - gem install bundler
+    - bundle install
+    - bundle exec rake redmine:plugins:test
+  tags:
+    - ruby
