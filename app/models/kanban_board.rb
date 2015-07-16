@@ -8,7 +8,7 @@ class KanbanBoard
 			@columns_by_status[status] = Column.new status
 		end
 
-		project_issues = Issue.visible(User.current, :project => @project)
+		project_issues = Issue.visible(User.current, :project => project)
 		if Setting.plugin_redhopper
 			project_issues = project_issues.where(tracker: Setting.plugin_redhopper["displayed_tracker_ids"])
 		end
