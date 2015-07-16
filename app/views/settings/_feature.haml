@@ -1,0 +1,7 @@
+%tr
+  %th
+    = title
+  %td
+    = check_box_tag "settings[features][#{name}]", true, Feature.enabled(name)
+  %td
+    = description
