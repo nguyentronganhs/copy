@@ -17,10 +17,12 @@ class KanbanBoard
 		end
 
 		@columns = statuses.map do |status|
-			@columns_by_status[status] = Column.new status
-		end
+			@columns_by_status[status] = Column.new status unless Feature.enabled("only_open_statuses") && status.is_closed?
+		end.compact
 
 		project_issues = Issue.visible(User.current, :project => project)
+		project_issues = project_issues.open if Feature.enabled("only_open_statuses")
+
 		if Setting.plugin_redhopper
 			project_issues = project_issues.where(tracker: Setting.plugin_redhopper["displayed_tracker_ids"])
 		end

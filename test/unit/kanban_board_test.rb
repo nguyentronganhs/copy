@@ -4,11 +4,13 @@ class KanbanBoardTest < ActiveSupport::TestCase
 
   setup do
     # Given
+    Feature.stubs(:enabled).returns(false)
+
     Role.delete_all
     @dev = Role.create!(name: 'Dev')
 
     IssueStatus.delete_all
-    @done = IssueStatus.create!(name: 'Done')
+    @done = IssueStatus.create!(name: 'Done', is_closed: true)
     @doing = IssueStatus.create!(name: 'Doing')
     @todo = IssueStatus.create!(name: 'To do')
     @doing.move_lower && @todo.reload && @doing.reload
@@ -67,6 +69,23 @@ class KanbanBoardTest < ActiveSupport::TestCase
 
     expected = [@todo, @doing, @done]
     @kanban_board = KanbanBoard.new Project.create!(name: 'Bugs Project', identifier: 'bugs-project', trackers: [@story])
+
+    # When
+    result = @kanban_board.columns
+
+    # Then
+    assert_equal expected.length, result.length
+    expected.each_with_index do |status, index|
+      assert_equal status, result[index].issue_status
+    end
+  end
+
+  test ".columns returns only the columns for open statuses" do
+    # Given
+    Feature.stubs(:enabled).with("only_open_statuses").returns(true)
+
+    expected = [@todo, @doing]
+    @kanban_board = KanbanBoard.new Project.create!(name: 'Bugs Project', identifier: 'bugs-project')
 
     # When
     result = @kanban_board.columns
