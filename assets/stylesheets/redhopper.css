@@ -68,4 +68,7 @@ ol.kanban {
     -khtml-user-drag: element;
     -webkit-user-drag: element; }
 
+.icon-exclamation {
+  background-image: url(../../../images/exclamation.png); }
+
 /*# sourceMappingURL=redhopper.css.map */

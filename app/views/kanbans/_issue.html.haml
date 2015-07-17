@@ -25,6 +25,8 @@
 					.issue-id ##{issue.id}
 					- if Feature.enabled "issue_meta-data_on_card"
 						.meta-data
+							- if @feature_show_blockers && (blockers = issue.relations_to.select {|ir| ir.relation_type == 'blocks' && !ir.issue_from.closed?}.map { |ir| ir.issue_from }).present?
+								%span.icon.icon-exclamation{title: 'Blocked by #' + blockers.map(&:id).join(', #') + '.'}= blockers.count
 							- unless (notes = issue.journals.select { |journal| !journal.notes.blank? }).empty?
 								%span.icon.icon-comment{title: "Notes count."}= notes.count
 							- unless issue.attachments.empty?
