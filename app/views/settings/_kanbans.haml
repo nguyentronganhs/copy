@@ -1,20 +1,20 @@
-%h3 Configuration
+%h3
+  = t('.configuration.title')
 
 %table
   %tbody
     %tr
-      %th Displayed trackers
+      %th
+        = t('.configuration.displayed_trackers.title')
       %td
         - Tracker.sorted.each do |tracker|
           = check_box_tag "settings[displayed_tracker_ids][]", tracker.id, Setting.plugin_redhopper.present? ? Setting.plugin_redhopper["displayed_tracker_ids"].include?(tracker.id.to_s) : false
           = tracker.name
 
-%h3 Feature switches
+- features = ["issue_meta-data_on_card", "move_back_to_unsorted", "only_necessary_columns", "only_open_statuses", "show_blockers"]
+%h3
+  = t('.feature_switches.title')
 
 %table
   %tbody
-    = render partial: "feature", locals: { title: "Issue meta-data on card", name: "issue_meta-data_on_card", description: "Displays hints about issue details like the assigned user or attachments count directly on the card so that you don't have to go to the details page." }
-    = render partial: "feature", locals: { title: "Move issue back to unsorted section", name: "move_back_to_unsorted", description: "A sorted issue has so few valid reasons to go back to the unsorted section that we decided to disable this feature on purpose. Activate it wisely." }
-    = render partial: "feature", locals: { title: "Only necessary columns", name: "only_necessary_columns", description: "Only displays columns used by the project's trackers." }
-    = render partial: "feature", locals: { title: "Only open statuses", name: "only_open_statuses", description: "Only displays columns for open statuses." }
-    = render partial: "feature", locals: { title: "Show blockers", name: "show_blockers", description: "Show blocked and blocking issues." }
+    = render partial: "feature", collection: features

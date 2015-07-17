@@ -1,7 +1,7 @@
 %tr
   %th
-    = title
+    = t(".#{feature}.title")
   %td
-    = check_box_tag "settings[features][#{name}]", true, Feature.enabled(name)
+    = check_box_tag "settings[features][#{feature}]", true, Feature.enabled(feature)
   %td
-    = description
+    = t(".#{feature}.description")

@@ -12,17 +12,17 @@
 					%input{type: "checkbox", name: "ids[]", value: issue.id}
 					- if sortable
 						.sortable
-							= link_to (tag :img, src: '/images/2uparrow.png', alt: "Move to top arrow"), move_redhopper_issue_path(issue_id: issue.id, target_issue_id: first_issue.id, insert: "before"), method: :post, title: "Move to top" unless first_issue == issue
+							= link_to (tag :img, src: '/images/2uparrow.png', alt: t('.move2top_arrow')), move_redhopper_issue_path(issue_id: issue.id, target_issue_id: first_issue.id, insert: "before"), method: :post, title: t('.move2top') unless first_issue == issue
 							- previous_issue = issue_counter == 0 ? nil : column.sorted_issues[issue_counter - 1]
-							= link_to (tag :img, src: '/images/1uparrow.png', alt: "Move up arrow"), move_redhopper_issue_path(issue_id: issue.id, target_issue_id: previous_issue.id, insert: "before"), method: :post, title: "Move up" unless previous_issue.nil?
+							= link_to (tag :img, src: '/images/1uparrow.png', alt: t('.moveup_arrow')), move_redhopper_issue_path(issue_id: issue.id, target_issue_id: previous_issue.id, insert: "before"), method: :post, title: t('.moveup') unless previous_issue.nil?
 							- next_issue = column.sorted_issues[issue_counter + 1]
-							= link_to (tag :img, src: '/images/1downarrow.png', alt: "Move down arrow"), move_redhopper_issue_path(issue_id: issue.id, target_issue_id: next_issue.id, insert: "after"), method: :post, title: "Move down" unless next_issue.nil?
-							= link_to (tag :img, src: '/images/2downarrow.png', alt: "Move to bottom arrow"), move_redhopper_issue_path(issue_id: issue.id, target_issue_id: last_issue.id, insert: "after"), method: :post, title: "Move to bottom" unless last_issue == issue
+							= link_to (tag :img, src: '/images/1downarrow.png', alt: t('.moveup_arrow')), move_redhopper_issue_path(issue_id: issue.id, target_issue_id: next_issue.id, insert: "after"), method: :post, title: t('.movedown') unless next_issue.nil?
+							= link_to (tag :img, src: '/images/2downarrow.png', alt: t('.move2bottom_arrow')), move_redhopper_issue_path(issue_id: issue.id, target_issue_id: last_issue.id, insert: "after"), method: :post, title: t('.move2bottom') unless last_issue == issue
 							- if Feature.enabled "move_back_to_unsorted"
-								= link_to (tag :img, src: '/images/bullet_diamond.png', alt: "Move back to unsorted section"), delete_redhopper_issue_path(issue_id: issue.id), method: :delete, title: "Move back to unsorted section"
+								= link_to (tag :img, src: '/images/bullet_diamond.png', alt: t('.goto_unsorted')), delete_redhopper_issue_path(issue_id: issue.id), method: :delete, title: t('.goto_unsorted')
 					- else
 						.unsortable
-							= link_to 'Move to sorted section', create_redhopper_issue_path(issue_id: issue.id), method: :post
+							= link_to t('.goto_sorted'), create_redhopper_issue_path(issue_id: issue.id), method: :post
 					%p= link_to issue.subject, issue
 					.issue-id ##{issue.id}
 					- if Feature.enabled "issue_meta-data_on_card"
@@ -30,12 +30,12 @@
 							- if blocked
 								%span.icon.icon-exclamation{title: 'Blocked by #' + blockers.map(&:id).join(', #') + '.'}= blockers.count
 							- unless (notes = issue.journals.select { |journal| !journal.notes.blank? }).empty?
-								%span.icon.icon-comment{title: "Notes count."}= notes.count
+								%span.icon.icon-comment{title: t('.notes_count')}= notes.count
 							- unless issue.attachments.empty?
-								%span.icon.icon-attachment{title: "Attachments count."}= issue.attachments.count
+								%span.icon.icon-attachment{title: t('.attachments_count')}= issue.attachments.count
 							- unless issue.assigned_to.nil?
-								%span.icon.icon-user{title: "User assigned."}
+								%span.icon.icon-user{title: t('.assigned_user')}
 									%abbr{title: issue.assigned_to} #{issue.assigned_to.firstname.to_s.chars.first}#{issue.assigned_to.lastname.to_s.chars.first}
 							- unless issue.description.blank?
-								%span.icon.icon-issue{title: "Description filled in."}
+								%span.icon.icon-issue{title: t('.description')}
 %hr{id: "issue-#{issue.id}-after"}

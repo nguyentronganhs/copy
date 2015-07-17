@@ -6,15 +6,17 @@
 			%li
 				%h3
 					= column.issue_status.name
-					%small{title: "Issues count"} (#{column.sorted_issues.length + column.unsorted_issues.length})
-				%h4 Sorted
+					%small{title: t(".issues_count")} (#{column.sorted_issues.length + column.unsorted_issues.length})
+				%h4
+					= t(".sorted")
 				%ol
 					- if first_issue = column.sorted_issues.first
 						%hr{id: "issue-#{first_issue.id}-before"}
 					- last_issue = column.sorted_issues.last
 					= render partial: 'issue', collection: column.sorted_issues, locals: { sortable: true, column: column, first_issue: first_issue, last_issue: last_issue }
 
-				%h4 Unsorted
+				%h4
+					= t(".unsorted")
 				%ol
 					= render partial: 'issue', collection: column.unsorted_issues
 
