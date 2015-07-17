@@ -30,6 +30,8 @@ ol.kanban {
           display: block; }
           ol.kanban > li ol li tr.blocked {
             background-color: #f5aeae; }
+          ol.kanban > li ol li tr.blocking {
+            background-color: lightgoldenrodyellow; }
           ol.kanban > li ol li tr td {
             margin: 0;
             padding: 0;

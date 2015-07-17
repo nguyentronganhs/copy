@@ -1,12 +1,13 @@
 - sortable ||= false
 - blocked = @feature_show_blockers && (blockers = issue.relations_to.select {|ir| ir.relation_type == 'blocks' && !ir.issue_from.closed?}.map { |ir| ir.issue_from }).present?
+- blocking = @feature_show_blockers && issue.relations_from.detect {|ir| ir.relation_type == 'blocks' && !ir.issue_to.closed?}
 %li{id: "issue-#{issue.id}", draggable: sortable ? "true" : "false"}
 	/
 		Redmine needs a tr for its contextual menu.
 		So here is the whole table package…
 	%table
 		%tbody
-			%tr.hascontextmenu{class: blocked ? 'blocked' : ''}
+			%tr.hascontextmenu{class: blocked ? 'blocked' : blocking ? 'blocking' : '' }
 				%td
 					%input{type: "checkbox", name: "ids[]", value: issue.id}
 					- if sortable
