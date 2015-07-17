@@ -1,0 +1,46 @@
+fr:
+  kanbans:
+    index:
+      issues_count: "Nombre de demandes."
+      sorted: "Triées"
+      unsorted: "En vrac"
+    issue:
+      move2top: "Déplacer en début de liste"
+      move2top_arrow: "Double flèche vers le haut"
+      moveup: "Déplacer vers le haut d'un cran"
+      moveup_arrow: "Simple flèche vers le haut"
+      movedown: "Déplacer vers le bas d'un cran"
+      movedown_arrow: "Simple flèche vers le bas"
+      move2bottom: "Déplacer en fin de liste"
+      move2bottom_arrow: "Double flèche vers le bas"
+      goto_unsorted: "Sortir de la zone triée"
+      goto_sorted: 'Trier la demande'
+      notes_count: "Nombre de commentaires."
+      attachments_count: "Nombre de fichiers joints."
+      assigned_user: "Personne assignée."
+      description: "Description remplie."
+      blocked_by: "Bloquée par #"
+  settings:
+    kanbans:
+      configuration:
+        title: "Configuration"
+        displayed_trackers:
+          title: "Trackers affichés"
+      feature_switches:
+        title: "Fonctionnalités activables"
+    feature:
+      issue_meta-data_on_card:
+        title: "Affichage des méta-données"
+        description: "Affiche des indices à propos des détails de la demande comme par exemple à qui elle est assignée ou le nombre de commentaires."
+      move_back_to_unsorted:
+        title: "Sortir une demande du tri"
+        description: "Cette fonctionnalité est désactivée par défaut car selon nous les raisons valables de sortir une demande de la zone de tri sont très rares.."
+      only_necessary_columns:
+        title: "Uniquement les colonnes nécessaires"
+        description: "Affiche uniquement les colonnes assocées aux trackers du projet."
+      only_open_statuses:
+        title: "Uniquement les statuts ouverts"
+        description: "N'affiche pas les colonnes associées à des statuts fermés."
+      show_blockers:
+        title: "Afficher les blocages"
+        description: "Affiche sur la carte des informations concernant les blocages de la demande."

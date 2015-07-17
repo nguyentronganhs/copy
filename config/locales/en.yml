@@ -19,6 +19,7 @@ en:
       attachments_count: "Attachments count."
       assigned_user: "User assigned."
       description: "Description filled in."
+      blocked_by: 'Blocked by #'
   settings:
     kanbans:
       configuration:

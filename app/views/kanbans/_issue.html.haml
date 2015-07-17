@@ -28,7 +28,7 @@
 					- if Feature.enabled "issue_meta-data_on_card"
 						.meta-data
 							- if blocked
-								%span.icon.icon-exclamation{title: 'Blocked by #' + blockers.map(&:id).join(', #') + '.'}= blockers.count
+								%span.icon.icon-exclamation{title: t('.blocked_by') + blockers.map(&:id).join(', #') + '.'}= blockers.count
 							- unless (notes = issue.journals.select { |journal| !journal.notes.blank? }).empty?
 								%span.icon.icon-comment{title: t('.notes_count')}= notes.count
 							- unless issue.attachments.empty?
