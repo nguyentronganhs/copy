@@ -1,11 +1,12 @@
 - sortable ||= false
+- blocked = @feature_show_blockers && (blockers = issue.relations_to.select {|ir| ir.relation_type == 'blocks' && !ir.issue_from.closed?}.map { |ir| ir.issue_from }).present?
 %li{id: "issue-#{issue.id}", draggable: sortable ? "true" : "false"}
 	/
 		Redmine needs a tr for its contextual menu.
 		So here is the whole table package…
 	%table
 		%tbody
-			%tr.hascontextmenu
+			%tr.hascontextmenu{class: blocked ? 'blocked' : ''}
 				%td
 					%input{type: "checkbox", name: "ids[]", value: issue.id}
 					- if sortable
@@ -25,7 +26,7 @@
 					.issue-id ##{issue.id}
 					- if Feature.enabled "issue_meta-data_on_card"
 						.meta-data
-							- if @feature_show_blockers && (blockers = issue.relations_to.select {|ir| ir.relation_type == 'blocks' && !ir.issue_from.closed?}.map { |ir| ir.issue_from }).present?
+							- if blocked
 								%span.icon.icon-exclamation{title: 'Blocked by #' + blockers.map(&:id).join(', #') + '.'}= blockers.count
 							- unless (notes = issue.journals.select { |journal| !journal.notes.blank? }).empty?
 								%span.icon.icon-comment{title: "Notes count."}= notes.count
