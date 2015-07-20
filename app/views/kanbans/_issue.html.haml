@@ -28,10 +28,11 @@
 							= link_to t('.goto_sorted'), create_redhopper_issue_path(issue_id: issue.id), method: :post
 					%p= link_to issue.subject, issue
 					- if @feature_block_with_comment
-						- blockers.each do |blocker|
-							%p.icon.icon-exclamation.blocker
-								= t('.blocked_by')
-								= link_to("##{blocker.id}.", blocker)
+						- if blocked_with_issues
+							- blockers.each do |blocker|
+								%p.icon.icon-exclamation.blocker
+									= t('.blocked_by')
+									= link_to("##{blocker.id}.", blocker)
 						- if blocked_with_comment
 							%p.icon.icon-exclamation.blocker
 								= t('.blocked_by')
