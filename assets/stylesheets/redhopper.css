@@ -44,6 +44,8 @@ ol.kanban {
             ol.kanban > li ol li tr td p {
               clear: both;
               margin: 0 0 1em; }
+              ol.kanban > li ol li tr td p.blocker {
+                margin: 0.5em 1em; }
             ol.kanban > li ol li tr td .issue-id {
               float: left; }
             ol.kanban > li ol li tr td .issue-due-before {

@@ -27,6 +27,18 @@
 						.unsortable
 							= link_to t('.goto_sorted'), create_redhopper_issue_path(issue_id: issue.id), method: :post
 					%p= link_to issue.subject, issue
+					- if @feature_block_with_comment
+						- blockers.each do |blocker|
+							%p.icon.icon-exclamation.blocker
+								= t('.blocked_by')
+								= link_to("##{blocker.id}.", blocker)
+						- if blocked_with_comment
+							%p.icon.icon-exclamation.blocker
+								= t('.blocked_by')
+								= "le dernier commentaire."
+								= link_to t('.unblock'), unblock_redhopper_issue_path(issue_id: issue.id), method: :delete
+						- else
+							= link_to (tag :img, src: '/plugin_assets/redhopper/images/exclamation-disabled.png', alt: t('.block_with_comment')), block_redhopper_issue_path(issue_id: issue.id), method: :post, title: t('.block_with_comment')
 					- if @feature_show_due_date && (due_delta = (issue.due_before - Date.today).to_i unless issue.due_before.nil?)
 						.issue-due-before{title: due_delta > 0 ? t('.on_time') : t('.overdue'),class: ("overdue" unless due_delta > 0)}= "#{due_delta.abs}" + t('.due_unit')
 					- if Feature.enabled "issue_meta-data_on_card"
@@ -42,17 +54,5 @@
 									%abbr{title: issue.assigned_to} #{issue.assigned_to.firstname.to_s.chars.first}#{issue.assigned_to.lastname.to_s.chars.first}
 							- unless issue.description.blank?
 								%span.icon.icon-issue{title: t('.description')}
-					- if @feature_block_with_comment
-						- blockers.each do |blocker|
-							%p.icon.icon-exclamation.blocker
-								= t('.blocked_by')
-								= link_to("##{blocker.id}.", blocker)
-						- if blocked_with_comment
-							%p.icon.icon-exclamation.blocker
-								= t('.blocked_by')
-								= "le dernier commentaire."
-								= link_to t('.unblock'), unblock_redhopper_issue_path(issue_id: issue.id), method: :delete
-						- else
-							= link_to (tag :img, src: '/plugin_assets/redhopper/images/exclamation-disabled.png', alt: t('.block_with_comment')), block_redhopper_issue_path(issue_id: issue.id), method: :post, title: t('.block_with_comment')
 
 %hr{id: "issue-#{issue.id}-after"}
