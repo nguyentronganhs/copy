@@ -19,7 +19,9 @@ fr:
       attachments_count: "Nombre de fichiers joints."
       assigned_user: "Personne assignée."
       description: "Description remplie."
-      blocked_by: "Bloquée par #"
+      blocked_by: "Bloquée par "
+      block_with_comment: 'Bloquer avec le dernier commentaire.'
+      unblock: 'Débloquer.'
       on_time: "Dans les temps"
       overdue: "En retard"
       due_unit: "j"
@@ -50,3 +52,6 @@ fr:
       show_due_date:
         title: "Afficher l'échéance"
         description: "Affiche le nombre de jours restant avant échéance."
+      block_with_comment:
+        title: "Bloquer avec un commentaire"
+        description: "Les demandes peuvent être marquées comme bloquées à l'aide du dernier commentaire."

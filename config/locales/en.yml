@@ -19,7 +19,9 @@ en:
       attachments_count: "Attachments count."
       assigned_user: "User assigned."
       description: "Description filled in."
-      blocked_by: 'Blocked by #'
+      blocked_by: 'Blocked by '
+      block_with_comment: 'Block with last comment.'
+      unblock: 'Unblock.'
       on_time: "On time"
       overdue: "Overdue"
       due_unit: 'd'
@@ -50,3 +52,6 @@ en:
       show_due_date:
         title: "Show due date"
         description: "Show remaining days before due date."
+      block_with_comment:
+        title: "Block with comment"
+        description: "Issues can be marked as blocked with the content of the last comment."

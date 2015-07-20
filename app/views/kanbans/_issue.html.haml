@@ -1,13 +1,15 @@
 - sortable ||= false
-- blocked = @feature_show_blockers && (blockers = issue.relations_to.select {|ir| ir.relation_type == 'blocks' && !ir.issue_from.closed?}.map { |ir| ir.issue_from }).present?
-- blocking = @feature_show_blockers && issue.relations_from.detect {|ir| ir.relation_type == 'blocks' && !ir.issue_to.closed?}
+- blocked_with_comment = @feature_block_with_comment && RedhopperIssue.where(issue_id: issue.id).first.try(:blocked)
+- blocked_with_issues = @feature_show_blockers && (blockers = issue.relations_to.select {|ir| ir.relation_type == 'blocks' && !ir.issue_from.closed?}.map { |ir| ir.issue_from }).present?
+- blocking_issue = @feature_show_blockers && issue.relations_from.detect {|ir| ir.relation_type == 'blocks' && !ir.issue_to.closed?}
+- blocked = blocked_with_comment || blocked_with_issues
 %li{id: "issue-#{issue.id}", draggable: sortable ? "true" : "false"}
 	/
 		Redmine needs a tr for its contextual menu.
 		So here is the whole table package…
 	%table
 		%tbody
-			%tr.hascontextmenu{class: blocked ? 'blocked' : blocking ? 'blocking' : '' }
+			%tr.hascontextmenu{class: blocked ? 'blocked' : blocking_issue ? 'blocking' : '' }
 				%td
 					%input{type: "checkbox", name: "ids[]", value: issue.id}
 					.issue-id ##{issue.id}
@@ -29,8 +31,8 @@
 						.issue-due-before{title: due_delta > 0 ? t('.on_time') : t('.overdue'),class: ("overdue" unless due_delta > 0)}= "#{due_delta.abs}" + t('.due_unit')
 					- if Feature.enabled "issue_meta-data_on_card"
 						.meta-data
-							- if blocked
-								%span.icon.icon-exclamation{title: t('.blocked_by') + blockers.map(&:id).join(', #') + '.'}= blockers.count
+							- if blocked && !@feature_block_with_comment
+								%span.icon.icon-exclamation{title: t('.blocked_by') + "#" + blockers.map(&:id).join(', #') + '.'}= blockers.count
 							- unless (notes = issue.journals.select { |journal| !journal.notes.blank? }).empty?
 								%span.icon.icon-comment{title: t('.notes_count')}= notes.count
 							- unless issue.attachments.empty?
@@ -40,4 +42,17 @@
 									%abbr{title: issue.assigned_to} #{issue.assigned_to.firstname.to_s.chars.first}#{issue.assigned_to.lastname.to_s.chars.first}
 							- unless issue.description.blank?
 								%span.icon.icon-issue{title: t('.description')}
+					- if @feature_block_with_comment
+						- blockers.each do |blocker|
+							%p.icon.icon-exclamation.blocker
+								= t('.blocked_by')
+								= link_to("##{blocker.id}.", blocker)
+						- if blocked_with_comment
+							%p.icon.icon-exclamation.blocker
+								= t('.blocked_by')
+								= "le dernier commentaire."
+								= link_to t('.unblock'), unblock_redhopper_issue_path(issue_id: issue.id), method: :delete
+						- else
+							= link_to (tag :img, src: '/plugin_assets/redhopper/images/exclamation-disabled.png', alt: t('.block_with_comment')), block_redhopper_issue_path(issue_id: issue.id), method: :post, title: t('.block_with_comment')
+
 %hr{id: "issue-#{issue.id}-after"}

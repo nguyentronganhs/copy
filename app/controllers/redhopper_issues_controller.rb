@@ -25,6 +25,24 @@ class RedhopperIssuesController < ApplicationController
     redirect_to project_kanbans_path(issue_to_move.issue.project)
   end
 
+  def block
+    issue_to_block = RedhopperIssue.where(issue_id: params[:issue_id]).first || RedhopperIssue.new(issue: Issue.find(params[:issue_id]))
+    issue_to_block.blocked = true
+
+    issue_to_block.save
+
+    redirect_to project_kanbans_path(issue_to_block.issue.project)
+  end
+
+  def unblock
+    issue_to_block = RedhopperIssue.where(issue_id: params[:issue_id]).first
+    issue_to_block.blocked = false
+
+    issue_to_block.save
+
+    redirect_to project_kanbans_path(issue_to_block.issue.project)
+  end
+
   def delete
     issue_to_delete = RedhopperIssue.where(issue_id: params[:issue_id]).first
     project = issue_to_delete.issue.project
