@@ -47,3 +47,6 @@ fr:
       show_blockers:
         title: "Afficher les blocages"
         description: "Affiche sur la carte des informations concernant les blocages de la demande."
+      show_due_date:
+        title: "Afficher l'échéance"
+        description: "Affiche le nombre de jours restant avant échéance."
