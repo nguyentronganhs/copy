@@ -10,6 +10,7 @@
 			%tr.hascontextmenu{class: blocked ? 'blocked' : blocking ? 'blocking' : '' }
 				%td
 					%input{type: "checkbox", name: "ids[]", value: issue.id}
+					.issue-id ##{issue.id}
 					- if sortable
 						.sortable
 							= link_to (tag :img, src: '/images/2uparrow.png', alt: t('.move2top_arrow')), move_redhopper_issue_path(issue_id: issue.id, target_issue_id: first_issue.id, insert: "before"), method: :post, title: t('.move2top') unless first_issue == issue
@@ -24,7 +25,8 @@
 						.unsortable
 							= link_to t('.goto_sorted'), create_redhopper_issue_path(issue_id: issue.id), method: :post
 					%p= link_to issue.subject, issue
-					.issue-id ##{issue.id}
+					- if @feature_show_due_date && (due_delta = (issue.due_before - Date.today).to_i unless issue.due_before.nil?)
+						.issue-due-before{title: due_delta > 0 ? t('.on_time') : t('.overdue'),class: ("overdue" unless due_delta > 0)}= "#{due_delta.abs}" + t('.due_unit')
 					- if Feature.enabled "issue_meta-data_on_card"
 						.meta-data
 							- if blocked

@@ -46,6 +46,11 @@ ol.kanban {
               margin: 0 0 1em; }
             ol.kanban > li ol li tr td .issue-id {
               float: left; }
+            ol.kanban > li ol li tr td .issue-due-before {
+              float: left; }
+              ol.kanban > li ol li tr td .issue-due-before.overdue {
+                color: red;
+                font-weight: bold; }
             ol.kanban > li ol li tr td .meta-data {
               float: right; }
               ol.kanban > li ol li tr td .meta-data span {

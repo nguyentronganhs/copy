@@ -20,6 +20,9 @@ fr:
       assigned_user: "Personne assignée."
       description: "Description remplie."
       blocked_by: "Bloquée par #"
+      on_time: "Dans les temps"
+      overdue: "En retard"
+      due_unit: "j"
   settings:
     kanbans:
       configuration:

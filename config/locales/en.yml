@@ -20,6 +20,9 @@ en:
       assigned_user: "User assigned."
       description: "Description filled in."
       blocked_by: 'Blocked by #'
+      on_time: "On time"
+      overdue: "Overdue"
+      due_unit: 'd'
   settings:
     kanbans:
       configuration:
@@ -44,3 +47,6 @@ en:
       show_blockers:
         title: "Show blockers"
         description: "Show blocked and blocking issues."
+      show_due_date:
+        title: "Show due date"
+        description: "Show remaining days before due date."
