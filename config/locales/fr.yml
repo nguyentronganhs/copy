@@ -20,7 +20,8 @@ fr:
       assigned_user: "Personne assignée."
       description: "Description remplie."
       blocked_by: "Bloquée par "
-      block_with_comment: 'Bloquer avec le dernier commentaire.'
+      block_with: 'Bloquer avec '
+      last_note: 'la dernière note.'
       unblock: 'Débloquer.'
       on_time: "Dans les temps"
       overdue: "En retard"

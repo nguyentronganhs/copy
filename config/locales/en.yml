@@ -20,7 +20,8 @@ en:
       assigned_user: "User assigned."
       description: "Description filled in."
       blocked_by: 'Blocked by '
-      block_with_comment: 'Block with last comment.'
+      block_with: 'Block with '
+      last_note: 'last note.'
       unblock: 'Unblock.'
       on_time: "On time"
       overdue: "Overdue"
