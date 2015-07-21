@@ -20,3 +20,11 @@ From now on, the best way to interact with your issues is by right-clicking them
 *NB : it is the main reason why drag'n'drop between issue statuses hasn't been implemented yet. It works well enough to focus on other features.*
 
 All the kanbans (card-shaped issues) summarize its issue : id, subject, notes and attachments count, assigned person… Things you like to know in a glance.
+
+## What else does it do?
+
+### Fine-grained relative prioritisation
+
+As an agile team member, I hate enum-based priority (urgent, high, normal, low…). I need to know what the next thing to do is without ambiguity. When two items have *high* priority, which one should I take?
+
+With relative prioritisation, all I know is that this issue should be done before that one and after this one. No two issues can have the exact same priority. To achieve that, you sort your kanbans thanks to up and down arrow, or drag'n'drop. The top-most kanban is the next thing to do.
