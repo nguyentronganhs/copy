@@ -36,3 +36,11 @@ Your workflow is built upon your trackers. All your *bugs* will follow the same 
 Based on your project's trackers and their transitions, Redhopper computes the minimal set of issue statuses to display. Therefore, your board is not polluted by statuses used by unused trackers, but only shows the necessary yet sufficient columns for your project.
 
 With the same purpose – unclutter your workspace – Redhopper can hide columns matching *closed* issue statuses. Once an issue is *closed*, no need to see it anymore. May it rest in piece as archive.
+
+### Obvious blockers
+
+Every flow impediment should receive special treatment: blinking, glowing, bouncing, highlighted, whatever, but visible at first sight. We decided to spare ourself the tiresomeness of the former solutions, and gave the blocked issues a eye-candy red background.
+
+As usual, Redhopper looks for a **built-in concept**, "blocks" relations, to mark a kanban as blocked, and links to the blocking issue (highlighted in yellow).
+
+Besides the built-in blocking system, Redhopper adds the notion of **self-blocked issue**. An issue can be marked as blocked by its last comment, really useful when one just want to ask for a confirmation before completing a task for instance.
