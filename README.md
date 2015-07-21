@@ -44,3 +44,17 @@ Every flow impediment should receive special treatment: blinking, glowing, bounc
 As usual, Redhopper looks for a **built-in concept**, "blocks" relations, to mark a kanban as blocked, and links to the blocking issue (highlighted in yellow).
 
 Besides the built-in blocking system, Redhopper adds the notion of **self-blocked issue**. An issue can be marked as blocked by its last comment, really useful when one just want to ask for a confirmation before completing a task for instance.
+
+## What's next?
+
+We've got tons of ideas, like :
+* Setting **WIP limits** and highlighting broken limits ;
+* Filtering issues with *saved queries* ;
+* Defining and displaying **definitions of done** ;
+* Stacked status for parallel or alternative operations…
+
+### How to contribute?
+
+As we're not making a living out of this plugin, so we improve it when we have some time to spare. Licensed under the [AGPLv3 terms](LICENSE.txt), code contributions are welcomed! Get in touch through [GitLab](https://gitlab.com/infoPiiaf/redhopper) or [e-mail](mailto:contact@infopiiaf.fr) to discuss it.
+
+**Code isn't the only valuable contribution**. Feedbacks, issues, translations, user guides… Just step in and enjoy the free software way of building great commons.
