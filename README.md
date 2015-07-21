@@ -10,7 +10,7 @@ No need to define columns, your issue statuses are good enough. No need to defin
 
 ## How does it work?
 
-First, [install the plugin](http://www.redmine.org/projects/redmine/wiki/Plugins#Installing-a-plugin).
+First, [install the plugin](http://www.redmine.org/projects/redmine/wiki/Plugins#Installing-a-plugin), then activate features in Redmine Administration/Plugins/Redhopper Settings.
 
 ### *Out-of-the-box* behaviour
 
