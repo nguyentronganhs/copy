@@ -32,7 +32,7 @@
 							- blockers.each do |blocker|
 								%p.icon.icon-exclamation.blocker
 									= t('.blocked_by')
-									= link_to("##{blocker.id}.", blocker)
+									= link_to("##{blocker.id}.", blocker, title: blocker.subject)
 						- if blocked_with_comment
 							%p.icon.icon-exclamation.blocker
 								= t('.blocked_by')
