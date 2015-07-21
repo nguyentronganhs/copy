@@ -53,6 +53,8 @@ We've got tons of ideas, like :
 * Defining and displaying **definitions of done** ;
 * Stacked status for parallel or alternative operations…
 
+To be honest, we've got some code quality improvements to do too. Redhopper is a good example of protoduction ([item 22](http://blog.codinghorror.com/new-programming-jargon/)), a pet project going into the wild. Expect some refactoring to land someday, or push yours ;-)
+
 ### How to contribute?
 
 As we're not making a living out of this plugin, so we improve it when we have some time to spare. Licensed under the [AGPLv3 terms](LICENSE.txt), code contributions are welcomed! Get in touch through [GitLab](https://gitlab.com/infoPiiaf/redhopper) or [e-mail](mailto:contact@infopiiaf.fr) to discuss it.
