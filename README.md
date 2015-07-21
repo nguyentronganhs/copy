@@ -28,3 +28,11 @@ All the kanbans (card-shaped issues) summarize its issue : id, subject, notes an
 As an agile team member, I hate enum-based priority (urgent, high, normal, low…). I need to know what the next thing to do is without ambiguity. When two items have *high* priority, which one should I take?
 
 With relative prioritisation, all I know is that this issue should be done before that one and after this one. No two issues can have the exact same priority. To achieve that, you sort your kanbans thanks to up and down arrow, or drag'n'drop. The top-most kanban is the next thing to do.
+
+### Only necesary and/or open columns
+
+Your workflow is built upon your trackers. All your *bugs* will follow the same path of *allowed workflow transitions* for this tracker. All your *user stories* will follow the same path of *allowed workflow transitions* for this tracker.
+
+Based on your project's trackers and their transitions, Redhopper computes the minimal set of issue statuses to display. Therefore, your board is not polluted by statuses used by unused trackers, but only shows the necessary yet sufficient columns for your project.
+
+With the same purpose – unclutter your workspace – Redhopper can hide columns matching *closed* issue statuses. Once an issue is *closed*, no need to see it anymore. May it rest in piece as archive.
