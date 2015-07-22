@@ -51,7 +51,8 @@ We've got tons of ideas, like :
 * Setting **WIP limits** and highlighting broken limits ;
 * Filtering issues with *saved queries* ;
 * Defining and displaying **definitions of done** ;
-* Stacked status for parallel or alternative operations…
+* Stacked status for parallel or alternative operations ;
+* **Flow analytics** : cumulative flow diagram, lead time…
 
 To be honest, we've got some code quality improvements to do too. Redhopper is a good example of protoduction ([item 22](http://blog.codinghorror.com/new-programming-jargon/)), a pet project going into the wild. Expect some refactoring to land someday, or push yours ;-)
 
