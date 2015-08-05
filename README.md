@@ -62,6 +62,6 @@ To be honest, we've got some code quality improvements to do too. Redhopper is a
 
 ### How to contribute?
 
-As we're not making a living out of this plugin, so we improve it when we have some time to spare. Licensed under the [AGPLv3 terms](LICENSE.txt), code contributions are welcomed! Get in touch through [GitLab](https://gitlab.com/infoPiiaf/redhopper) or [e-mail](mailto:contact@infopiiaf.fr) to discuss it.
+As we're not making a living out of this plugin, we improve it when we have some time to spare. Licensed under the [AGPLv3 terms](LICENSE.txt), code contributions are welcomed! Get in touch through [GitLab](https://gitlab.com/infoPiiaf/redhopper) or [e-mail](mailto:contact@infopiiaf.fr) to discuss it.
 
 **Code isn't the only valuable contribution**. Feedbacks, issues, translations, user guides… Just step in and enjoy the free software way of building great commons.
