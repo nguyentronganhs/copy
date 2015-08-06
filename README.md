@@ -2,6 +2,8 @@
 
 Kanban boards for Redmine, inspired by *Jira Agile* (formerly known as *Greenhopper*), but following its own path.
 
+Note: tested with Redmine ~> 3.0.3
+
 ## Wait. But why?
 
 Yep, we are building yet another Kanban plugin for Redmine. The difference this time is the **extensive use of Redmine core concepts** (issues, trackers, workflow, etc.) instead of building everything from scratch.
@@ -10,11 +12,9 @@ No need to define columns, your issue statuses are good enough. No need to defin
 
 ## How does it work?
 
-First, [install the plugin](http://www.redmine.org/projects/redmine/wiki/Plugins#Installing-a-plugin).
-
-Then, activate the *Kanbans* module in your project configuration.
-
-Eventually, activate additional features in Redmine Administration/Plugins/Redhopper Settings.
+1. [Install the plugin](http://www.redmine.org/projects/redmine/wiki/Plugins#Installing-a-plugin).
+2. Activate the *Kanbans* module in your project configuration.
+3. Eventually, activate additional features in Redmine Administration/Plugins/Redhopper Settings.
 
 ### *Out-of-the-box* behaviour
 
@@ -62,6 +62,6 @@ To be honest, we've got some code quality improvements to do too. Redhopper is a
 
 ### How to contribute?
 
-As we're not making a living out of this plugin, we improve it when we have some time to spare. Licensed under the [AGPLv3 terms](LICENSE.txt), code contributions are welcomed! Get in touch through [GitLab](https://git.framasoft.org/infopiiaf/redhopper) or [e-mail](mailto:contact@infopiiaf.fr) to discuss it.
+As we're not making a living out of this plugin, we improve it when we have some time to spare. Licensed under the [AGPLv3 terms](LICENSE.txt), code contributions are welcomed! Get in touch through [Framagit](https://git.framasoft.org/infopiiaf/redhopper) (GitLab) or [e-mail](mailto:contact@infopiiaf.fr) to discuss it.
 
 **Code isn't the only valuable contribution**. Feedbacks, issues, translations, user guides… Just step in and enjoy the free software way of building great commons.
