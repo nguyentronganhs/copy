@@ -1,5 +1,6 @@
 (function ($) {
 	$(function () {
+		$("ol.kanban").height(Math.max(document.documentElement.clientHeight, window.innerHeight || 0) - $("ol.kanban").offset().top - 10);
 		var dragSrcEl;
 		var dragSrcList;
 		var dropzones;
