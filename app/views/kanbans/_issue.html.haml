@@ -34,10 +34,10 @@
 									= t('.blocked_by')
 									= link_to("##{blocker.id}.", blocker, title: blocker.subject)
 						- if blocked_with_comment
-							- journals_to_show = issue.journals.visible.where("journals.notes IS NOT NULL").last
+							- journals_to_show = issue.journals.visible.where("LENGTH(journals.notes) > 0").last
 							%p.icon.icon-exclamation.blocker
 								= t('.blocked_by')
-								= link_to t('.last_note'), issue_path(issue, anchor: "note-#{journals_to_show.journalized_id}"), title: journals_to_show.notes
+								= link_to t('.last_note'), issue_path(issue, anchor: "note-#{issue.journals.visible.count}"), title: journals_to_show.notes
 								= link_to t('.unblock'), unblock_redhopper_issue_path(issue_id: issue.id), method: :delete
 						- elsif issue.journals.count > 0
 							= link_to block_redhopper_issue_path(issue_id: issue.id), method: :post, title: t('.block_with') + t('.last_note') do
@@ -48,7 +48,7 @@
 						.meta-data
 							- if blocked && !@feature_block_with_comment
 								%span.icon.icon-exclamation{title: t('.blocked_by') + "#" + blockers.map(&:id).join(', #') + '.'}= blockers.count
-							- unless (notes = issue.journals.visible.where("journals.notes IS NOT NULL")).empty?
+							- unless (notes = issue.journals.visible.where("LENGTH(journals.notes) > 0")).empty?
 								%span.icon.icon-comment{title: t('.notes_count')}= notes.count
 							- unless issue.attachments.empty?
 								%span.icon.icon-attachment{title: t('.attachments_count')}= issue.attachments.count
