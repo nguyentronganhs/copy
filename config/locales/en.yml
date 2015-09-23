@@ -41,9 +41,6 @@ en:
       only_open_statuses:
         title: "Only open statuses"
         description: "Only displays columns for open statuses."
-      show_blockers:
-        title: "Show blockers"
-        description: "Show blocked and blocking issues."
       show_due_date:
         title: "Show due date"
         description: "Show remaining days before due date."

@@ -1,7 +1,7 @@
 - sortable ||= false
 - blocked_with_comment = @feature_block_with_comment && RedhopperIssue.where(issue_id: issue.id).first.try(:blocked)
-- blocked_with_issues = @feature_show_blockers && (blockers = issue.relations_to.select {|ir| ir.relation_type == 'blocks' && !ir.issue_from.closed?}.map { |ir| ir.issue_from }).present?
-- blocking_issue = @feature_show_blockers && issue.relations_from.detect {|ir| ir.relation_type == 'blocks' && !ir.issue_to.closed?}
+- blocked_with_issues = (blockers = issue.relations_to.select {|ir| ir.relation_type == 'blocks' && !ir.issue_from.closed?}.map { |ir| ir.issue_from }).present?
+- blocking_issue = issue.relations_from.detect {|ir| ir.relation_type == 'blocks' && !ir.issue_to.closed?}
 - blocked = blocked_with_comment || blocked_with_issues
 %li{id: "issue-#{issue.id}", draggable: sortable ? "true" : "false"}
 	/
