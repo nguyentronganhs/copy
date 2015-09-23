@@ -35,9 +35,6 @@ en:
       feature_switches:
         title: "Feature switches"
     feature:
-      issue_meta-data_on_card:
-        title: "Issue meta-data on card"
-        description: "Displays hints about issue details like the assigned user or attachments count directly on the card so that you don't have to go to the details page."
       move_back_to_unsorted:
         title: "Move issue back to unsorted section"
         description: "A sorted issue has so few valid reasons to go back to the unsorted section that we decided to disable this feature on purpose. Activate it wisely."
