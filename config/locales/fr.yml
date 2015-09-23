@@ -41,9 +41,6 @@ fr:
       only_open_statuses:
         title: "Uniquement les statuts ouverts"
         description: "N'affiche pas les colonnes associées à des statuts fermés."
-      show_due_date:
-        title: "Afficher l'échéance"
-        description: "Affiche le nombre de jours restant avant échéance."
       block_with_comment:
         title: "Bloquer avec un commentaire"
         description: "Les demandes peuvent être marquées comme bloquées à l'aide du dernier commentaire."

@@ -42,7 +42,7 @@
 						- elsif issue.journals.count > 0
 							= link_to block_redhopper_issue_path(issue_id: issue.id), method: :post, title: t('.block_with') + t('.last_note') do
 								= tag :img, src: '/plugin_assets/redhopper/images/exclamation-disabled.png', alt: t('.block_with') + t('.last_note')
-					- if @feature_show_due_date && (due_delta = (issue.due_before - Date.today).to_i unless issue.due_before.nil?)
+					- if (due_delta = (issue.due_before - Date.today).to_i unless issue.due_before.nil?)
 						.issue-due-before{title: due_delta > 0 ? t('.on_time') : t('.overdue'),class: ("overdue" unless due_delta > 0)}= "#{due_delta.abs}" + t('.due_unit')
 						.meta-data
 							- if blocked && !@feature_block_with_comment
