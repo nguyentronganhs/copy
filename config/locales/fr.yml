@@ -41,6 +41,3 @@ fr:
       only_open_statuses:
         title: "Uniquement les statuts ouverts"
         description: "N'affiche pas les colonnes associées à des statuts fermés."
-      block_with_comment:
-        title: "Bloquer avec un commentaire"
-        description: "Les demandes peuvent être marquées comme bloquées à l'aide du dernier commentaire."
