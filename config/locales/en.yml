@@ -38,9 +38,6 @@ en:
       move_back_to_unsorted:
         title: "Move issue back to unsorted section"
         description: "A sorted issue has so few valid reasons to go back to the unsorted section that we decided to disable this feature on purpose. Activate it wisely."
-      only_necessary_columns:
-        title: "Only necessary columns"
-        description: "Only displays columns used by the project's trackers."
       only_open_statuses:
         title: "Only open statuses"
         description: "Only displays columns for open statuses."

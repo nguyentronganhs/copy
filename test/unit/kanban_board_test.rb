@@ -48,8 +48,6 @@ class KanbanBoardTest < ActiveSupport::TestCase
 
   test ".columns returns only the necessary columns for project trackers" do
     # Given
-    Feature.expects(:enabled).with("only_necessary_columns").returns(true)
-
     expected = [@doing, @done]
     @kanban_board = KanbanBoard.new Project.create!(name: 'Bugs Project', identifier: 'bugs-project', trackers: [@bug])
 
@@ -65,8 +63,6 @@ class KanbanBoardTest < ActiveSupport::TestCase
 
   test ".columns returns only the necessary columns for project trackers sorted" do
     # Given
-    Feature.expects(:enabled).with("only_necessary_columns").returns(true)
-
     expected = [@todo, @doing, @done]
     @kanban_board = KanbanBoard.new Project.create!(name: 'Bugs Project', identifier: 'bugs-project', trackers: [@story])
 

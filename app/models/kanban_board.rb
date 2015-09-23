@@ -6,15 +6,12 @@ class KanbanBoard
 		@columns_by_status = {}
 
 		statuses = IssueStatus.sorted
-
-		if Feature.enabled("only_necessary_columns")
-			necessary_statuses = []
-			WorkflowTransition.where(:tracker_id => project.trackers.map(&:id), :role_id => Role.all.map(&:id)).each do |transition|
-				necessary_statuses << transition.old_status
-				necessary_statuses << transition.new_status
-			end
-			statuses = statuses & necessary_statuses.uniq
+		necessary_statuses = []
+		WorkflowTransition.where(:tracker_id => project.trackers.map(&:id), :role_id => Role.all.map(&:id)).each do |transition|
+			necessary_statuses << transition.old_status
+			necessary_statuses << transition.new_status
 		end
+		statuses = statuses & necessary_statuses.uniq
 
 		@columns = statuses.map do |status|
 			@columns_by_status[status] = Column.new status unless Feature.enabled("only_open_statuses") && status.is_closed?

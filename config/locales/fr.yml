@@ -38,9 +38,6 @@ fr:
       move_back_to_unsorted:
         title: "Sortir une demande du tri"
         description: "Cette fonctionnalité est désactivée par défaut car selon nous les raisons valables de sortir une demande de la zone de tri sont très rares.."
-      only_necessary_columns:
-        title: "Uniquement les colonnes nécessaires"
-        description: "Affiche uniquement les colonnes assocées aux trackers du projet."
       only_open_statuses:
         title: "Uniquement les statuts ouverts"
         description: "N'affiche pas les colonnes associées à des statuts fermés."
