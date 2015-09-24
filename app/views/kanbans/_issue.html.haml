@@ -3,6 +3,8 @@
 - blocked_with_issues = (blockers = issue.relations_to.select {|ir| ir.relation_type == 'blocks' && !ir.issue_from.closed?}.map { |ir| ir.issue_from }).present?
 - blocking_issue = issue.relations_from.detect {|ir| ir.relation_type == 'blocks' && !ir.issue_to.closed?}
 - blocked = blocked_with_comment || blocked_with_issues
+/ Some issue updates set notes to nil or "" hence the inline SQL :(
+- comments = issue.journals.visible.where("LENGTH(journals.notes) > 0")
 %li{id: "issue-#{issue.id}", draggable: sortable ? "true" : "false"}
 	/
 		Redmine needs a tr for its contextual menu.
@@ -33,7 +35,7 @@
 								= t('.blocked_by')
 								= link_to("##{blocker.id}.", blocker, title: blocker.subject)
 					- if blocked_with_comment
-						- journals_to_show = issue.journals.visible.where("LENGTH(journals.notes) > 0").last
+						- journals_to_show = comments.last
 						%p.icon.icon-exclamation.blocker
 							= t('.blocked_by')
 							= link_to t('.last_note'), issue_path(issue, anchor: "note-#{issue.journals.visible.count}"), title: journals_to_show.notes
@@ -44,8 +46,8 @@
 					- if (due_delta = (issue.due_before - Date.today).to_i unless issue.due_before.nil?)
 						.issue-due-before{title: due_delta > 0 ? t('.on_time') : t('.overdue'),class: ("overdue" unless due_delta > 0)}= "#{due_delta.abs}" + t('.due_unit')
 						.meta-data
-							- unless (notes = issue.journals.visible.where("LENGTH(journals.notes) > 0")).empty?
-								%span.icon.icon-comment{title: t('.notes_count')}= notes.count
+							- unless comments.empty?
+								%span.icon.icon-comment{title: t('.notes_count')}= comments.count
 							- unless issue.attachments.empty?
 								%span.icon.icon-attachment{title: t('.attachments_count')}= issue.attachments.count
 							- unless issue.assigned_to.nil?
