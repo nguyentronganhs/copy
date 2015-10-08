@@ -30,8 +30,8 @@ fr:
     kanbans:
       configuration:
         title: "Configuration"
-        displayed_trackers:
-          title: "Trackers affichés"
+        hidden_trackers:
+          title: "Trackers masqués"
       feature_switches:
         title: "Fonctionnalités activables"
     feature:

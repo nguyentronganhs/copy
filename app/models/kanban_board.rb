@@ -20,8 +20,9 @@ class KanbanBoard
 		project_issues = Issue.visible(User.current, :project => project)
 		project_issues = project_issues.open if Feature.enabled("only_open_statuses")
 
-		if Setting.plugin_redhopper
-			project_issues = project_issues.where(tracker: Setting.plugin_redhopper["displayed_tracker_ids"])
+		if Setting.plugin_redhopper && Setting.plugin_redhopper["hidden_tracker_ids"]
+			wanted_tracker_ids = Tracker.select(:id).map(&:id).map(&:to_s) - Setting.plugin_redhopper["hidden_tracker_ids"]
+			project_issues = project_issues.where(tracker: wanted_tracker_ids)
 		end
 		sorted_issues = RedhopperIssue.ordered
 
