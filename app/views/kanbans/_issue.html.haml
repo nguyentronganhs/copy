@@ -2,7 +2,6 @@
 - blocked_with_comment = RedhopperIssue.where(issue_id: issue.id).first.try(:blocked)
 - blocked_with_issues = (blockers = issue.relations_to.select {|ir| ir.relation_type == 'blocks' && !ir.issue_from.closed?}.map { |ir| ir.issue_from }).present?
 - blocking_issue = issue.relations_from.detect {|ir| ir.relation_type == 'blocks' && !ir.issue_to.closed?}
-- blocked = blocked_with_comment || blocked_with_issues
 / Some issue updates set notes to nil or "" hence the inline SQL :(
 - comments = issue.journals.visible.where("LENGTH(journals.notes) > 0")
 %li{id: "issue-#{issue.id}", draggable: sortable ? "true" : "false"}
@@ -11,7 +10,7 @@
 		So here is the whole table package…
 	%table
 		%tbody
-			%tr.hascontextmenu{class: blocked ? 'blocked' : blocking_issue ? 'blocking' : '' }
+			%tr.hascontextmenu{class: blocked_with_issues ? 'highlight_warning' : blocking_issue || blocked_with_comment ? 'highlight_danger' : '' }
 				%td
 					%input{type: "checkbox", name: "ids[]", value: issue.id}
 					.issue-id ##{issue.id}

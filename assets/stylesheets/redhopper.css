@@ -28,9 +28,9 @@ ol.kanban {
           border-radius: 2px;
           box-shadow: 0 1px 1px 0 #545454;
           display: block; }
-          ol.kanban > li ol li tr.blocked {
+          ol.kanban > li ol li tr.highlight_danger {
             background-color: #f5aeae; }
-          ol.kanban > li ol li tr.blocking {
+          ol.kanban > li ol li tr.highlight_warning {
             background-color: lightgoldenrodyellow; }
           ol.kanban > li ol li tr td {
             margin: 0;
