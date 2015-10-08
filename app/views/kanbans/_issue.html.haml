@@ -36,9 +36,12 @@
 								= link_to("##{blocker.id}.", blocker, title: blocker.subject)
 					- if blocked_with_comment
 						- journals_to_show = comments.last
-						%p.icon.icon-exclamation.blocker
+						%div.icon.icon-exclamation.blocker
 							= t('.blocked_by')
-							= link_to t('.last_note'), issue_path(issue, anchor: "note-#{issue.journals.visible.count}"), title: journals_to_show.notes
+							%div.tooltip{style: 'display:inline-block;'}
+								= link_to t('.last_note'), issue_path(issue, anchor: "note-#{issue.journals.visible.count}")
+								%span.tip
+									= textilizable(journals_to_show.notes)
 							= link_to t('.unblock'), unblock_redhopper_issue_path(issue_id: issue.id), method: :delete
 					- elsif issue.journals.count > 0
 						= link_to block_redhopper_issue_path(issue_id: issue.id), method: :post, title: t('.block_with') + t('.last_note') do
