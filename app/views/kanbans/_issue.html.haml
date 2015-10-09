@@ -34,15 +34,15 @@
 								= t('.blocked_by')
 								= link_to("##{blocker.id}.", blocker, title: blocker.subject)
 					- if blocked_with_comment
-						- journals_to_show = comments.last
-						%div.icon.icon-exclamation.blocker
-							= t('.blocked_by')
-							%div.tooltip{style: 'display:inline-block;'}
-								= link_to t('.last_note'), issue_path(issue, anchor: "note-#{issue.journals.visible.count}")
-								%span.tip
-									= textilizable(journals_to_show.notes)
-							= link_to t('.unblock'), unblock_redhopper_issue_path(issue_id: issue.id), method: :delete
-					- elsif issue.journals.count > 0
+						- if comment_to_show = comments.last
+							%div.icon.icon-exclamation.blocker
+								= t('.blocked_by')
+								%div.tooltip{style: 'display:inline-block;'}
+									= link_to t('.last_note'), issue_path(issue, anchor: "note-#{issue.journals.visible.count}")
+									%span.tip
+										= textilizable(comment_to_show.notes)
+								= link_to t('.unblock'), unblock_redhopper_issue_path(issue_id: issue.id), method: :delete
+					- elsif comments.count > 0
 						= link_to block_redhopper_issue_path(issue_id: issue.id), method: :post, title: t('.block_with') + t('.last_note') do
 							= tag :img, src: '/plugin_assets/redhopper/images/exclamation-disabled.png', alt: t('.block_with') + t('.last_note')
 					- if (due_delta = (issue.due_before - Date.today).to_i unless issue.due_before.nil?)
