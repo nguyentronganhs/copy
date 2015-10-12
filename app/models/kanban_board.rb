@@ -24,14 +24,19 @@ class KanbanBoard
 			wanted_tracker_ids = Tracker.pluck(:id).map(&:to_s) - Setting.plugin_redhopper["hidden_tracker_ids"]
 			project_issues = project_issues.where(tracker: wanted_tracker_ids)
 		end
-		sorted_issues = RedhopperIssue.ordered
+		redhopper_issues = RedhopperIssue.ordered
+		project_issues = project_issues.to_a
 
-		sorted_issues.each do |issue|
-			column_for_issue_status(issue.issue.status).sorted_issues << issue.issue if project_issues.include?(issue.issue)
+		redhopper_issues.each do |redhopper_issue|
+			issue = redhopper_issue.issue
+			if project_issues.include?(issue)
+				column_for_issue_status(issue.status).sorted_issues << redhopper_issue
+				project_issues.delete issue
+			end
 		end
 
 		project_issues.each do |issue|
-			column_for_issue_status(issue.status).unsorted_issues << issue unless column_for_issue_status(issue.status).sorted_issues.include?(issue)
+			column_for_issue_status(issue.status).unsorted_issues << RedhopperIssue.new(issue: issue)
 		end
 	end
 

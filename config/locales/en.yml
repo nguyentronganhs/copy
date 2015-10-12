@@ -4,7 +4,7 @@ en:
       issues_count: "Issues count"
       sorted: "Sorted"
       unsorted: "Unsorted"
-    issue:
+    kanban:
       move2top: "Move to top"
       move2top_arrow: "Move to top arrow"
       moveup: "Move up"

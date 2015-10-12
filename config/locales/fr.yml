@@ -4,7 +4,7 @@ fr:
       issues_count: "Nombre de demandes."
       sorted: "Triées"
       unsorted: "En vrac"
-    issue:
+    kanban:
       move2top: "Déplacer en début de liste"
       move2top_arrow: "Double flèche vers le haut"
       moveup: "Déplacer vers le haut d'un cran"

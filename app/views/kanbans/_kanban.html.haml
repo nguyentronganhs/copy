@@ -1,25 +1,25 @@
 - sortable ||= false
-- blocked_with_comment = RedhopperIssue.where(issue_id: issue.id).first.try(:blocked)
-- blocked_with_issues = (blockers = issue.relations_to.select {|ir| ir.relation_type == 'blocks' && !ir.issue_from.closed?}.map { |ir| ir.issue_from }).present?
-- blocking_issue = issue.relations_from.detect {|ir| ir.relation_type == 'blocks' && !ir.issue_to.closed?}
-/ Some issue updates set notes to nil or "" hence the inline SQL :(
-- comments = issue.journals.visible.where("LENGTH(journals.notes) > 0")
+- blocked_with_comment = kanban.blocked?
+- blocked_with_issues = kanban.blocked_with_issues?
+- blocking_issue = kanban.blocking_issue?
+- comments = kanban.comments
+- issue = kanban.issue
 %li{id: "issue-#{issue.id}", draggable: sortable ? "true" : "false"}
 	/
 		Redmine needs a tr for its contextual menu.
 		So here is the whole table package…
 	%table
 		%tbody
-			%tr.hascontextmenu{class: blocked_with_issues ? 'highlight_warning' : blocking_issue || blocked_with_comment ? 'highlight_danger' : '' }
+			%tr.hascontextmenu{class: kanban.highlight_class }
 				%td
 					%input{type: "checkbox", name: "ids[]", value: issue.id}
 					.issue-id ##{issue.id}
 					- if sortable
 						.sortable
 							= link_to (tag :img, src: '/images/2uparrow.png', alt: t('.move2top_arrow')), move_redhopper_issue_path(issue_id: issue.id, target_issue_id: first_issue.id, insert: "before"), method: :post, title: t('.move2top') unless first_issue == issue
-							- previous_issue = issue_counter == 0 ? nil : column.sorted_issues[issue_counter - 1]
+							- previous_issue = kanban_counter == 0 ? nil : column.sorted_issues[kanban_counter - 1]
 							= link_to (tag :img, src: '/images/1uparrow.png', alt: t('.moveup_arrow')), move_redhopper_issue_path(issue_id: issue.id, target_issue_id: previous_issue.id, insert: "before"), method: :post, title: t('.moveup') unless previous_issue.nil?
-							- next_issue = column.sorted_issues[issue_counter + 1]
+							- next_issue = column.sorted_issues[kanban_counter + 1]
 							= link_to (tag :img, src: '/images/1downarrow.png', alt: t('.moveup_arrow')), move_redhopper_issue_path(issue_id: issue.id, target_issue_id: next_issue.id, insert: "after"), method: :post, title: t('.movedown') unless next_issue.nil?
 							= link_to (tag :img, src: '/images/2downarrow.png', alt: t('.move2bottom_arrow')), move_redhopper_issue_path(issue_id: issue.id, target_issue_id: last_issue.id, insert: "after"), method: :post, title: t('.move2bottom') unless last_issue == issue
 							- if Feature.enabled "move_back_to_unsorted"
@@ -29,7 +29,7 @@
 							= link_to t('.goto_sorted'), create_redhopper_issue_path(issue_id: issue.id), method: :post
 					%p= link_to issue.subject, issue
 					- if blocked_with_issues
-						- blockers.each do |blocker|
+						- kanban.blockers.each do |blocker|
 							%p.icon.icon-exclamation.blocker
 								= t('.blocked_by')
 								= link_to("##{blocker.id}.", blocker, title: blocker.subject)
