@@ -78,4 +78,15 @@ class RedhopperIssuesControllerTest < ActionController::TestCase
     assert_redirected_to project_kanbans_path(@kanban.issue.project)
   end
 
+  def test_delete
+    # Given
+    requested_issue = @kanban.issue
+    # When
+    assert_difference('RedhopperIssue.count', -1) do
+      post :delete, :id => @kanban
+    end
+    # Then
+    assert_redirected_to project_kanbans_path(requested_issue.project)
+  end
+
 end
