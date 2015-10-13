@@ -10,11 +10,8 @@ class RedhopperIssuesController < ApplicationController
   def move
     issue_to_move = RedhopperIssue.find(params[:id])
     target_issue = RedhopperIssue.find(params[:target_id])
-    new_previous = target_issue
 
-    if "before" == params[:insert]
-      new_previous = target_issue.previous
-    end
+    new_previous = "after" == params[:insert] ? target_issue : target_issue.previous
 
     if new_previous
       issue_to_move.append_to new_previous
