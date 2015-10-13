@@ -35,7 +35,7 @@ class KanbanBoardTest < ActiveSupport::TestCase
 
     Issue.delete_all
     @issue_todo = Issue.create!(subject: "Issue 1", project: @project, tracker: @story, status: @todo, priority: @priority, author: User.current)
-    @issue_doing = Issue.create!(subject: "Issue 1", project: @project, tracker: @story, status: @doing, priority: @priority, author: User.current)
+    @issue_doing = Issue.create!(subject: "Issue 1", project: @project, tracker: @bug, status: @doing, priority: @priority, author: User.current)
     @issue_done = Issue.create!(subject: "Issue 1", project: @project, tracker: @story, status: @done, priority: @priority, author: User.current)
 
     RedhopperIssue.delete_all
@@ -118,6 +118,44 @@ class KanbanBoardTest < ActiveSupport::TestCase
 
     # Then
     assert_equal expected, result.issue_status
+  end
+
+  test ".issues returns an array" do
+    # When
+    result = @kanban_board.send :issues
+    # Then
+    assert_instance_of Array, result
+  end
+
+  test ".issues returns all visible issues for project" do
+    # Given
+    expected = [@issue_todo, @issue_doing, @issue_done]
+    # When
+    result = @kanban_board.send :issues
+    # Then
+    assert_equal expected, result
+  end
+
+  test ".issues returns only open issues" do
+    # Given
+    Feature.stubs(:enabled).with("only_open_statuses").returns(true)
+    expected = [@issue_todo, @issue_doing]
+    # When
+    result = @kanban_board.send :issues
+    # Then
+    assert_equal expected, result
+    Feature.stubs(:enabled).with("only_open_statuses").returns(false)
+  end
+
+  test ".issues returns only issues with displayed trackers" do
+    # Given
+    Setting.plugin_redhopper = { "hidden_tracker_ids" => [ @bug.id.to_s ] }
+    expected = [@issue_todo, @issue_done]
+    # When
+    result = @kanban_board.send :issues
+    # Then
+    assert_equal expected, result
+    Setting.plugin_redhopper = nil
   end
 
 end
