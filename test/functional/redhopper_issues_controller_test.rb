@@ -60,4 +60,22 @@ class RedhopperIssuesControllerTest < ActionController::TestCase
     assert_redirected_to project_kanbans_path(to_move_up.issue.project)
   end
 
+  def test_block
+    # When
+    get :block, id: @kanban.id
+    # Then
+    assert @kanban.reload.blocked?
+    assert_redirected_to project_kanbans_path(@kanban.issue.project)
+  end
+
+  def test_unblock
+    # Given
+    blocked_issue = RedhopperIssue.create! issue: Issue.find(2), blocked: true
+    # When
+    get :unblock, id: @kanban.id
+    # Then
+    assert_not @kanban.reload.blocked?
+    assert_redirected_to project_kanbans_path(@kanban.issue.project)
+  end
+
 end
