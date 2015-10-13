@@ -1,7 +1,4 @@
 - sortable ||= false
-- blocked_with_comment = kanban.blocked?
-- blocked_with_issues = kanban.blocked_with_issues?
-- blocking_issue = kanban.blocking_issue?
 - comments = kanban.comments
 - issue = kanban.issue
 %li{id: "issue-#{issue.id}", draggable: sortable ? "true" : "false"}
@@ -22,18 +19,18 @@
 							- next_issue = column.sorted_issues[kanban_counter + 1]
 							= link_to (tag :img, src: '/images/1downarrow.png', alt: t('.moveup_arrow')), move_redhopper_issue_path(issue_id: issue.id, target_issue_id: next_issue.id, insert: "after"), method: :post, title: t('.movedown') unless next_issue.nil?
 							= link_to (tag :img, src: '/images/2downarrow.png', alt: t('.move2bottom_arrow')), move_redhopper_issue_path(issue_id: issue.id, target_issue_id: last_issue.id, insert: "after"), method: :post, title: t('.move2bottom') unless last_issue == issue
-							- if Feature.enabled "move_back_to_unsorted"
+							- if @can_unsort
 								= link_to (tag :img, src: '/images/bullet_diamond.png', alt: t('.goto_unsorted')), delete_redhopper_issue_path(issue_id: issue.id), method: :delete, title: t('.goto_unsorted')
 					- else
 						.unsortable
 							= link_to t('.goto_sorted'), create_redhopper_issue_path(issue_id: issue.id), method: :post
 					%p= link_to issue.subject, issue
-					- if blocked_with_issues
+					- if kanban.blocked_with_issues?
 						- kanban.blockers.each do |blocker|
 							%p.icon.icon-exclamation.blocker
 								= t('.blocked_by')
 								= link_to("##{blocker.id}.", blocker, title: blocker.subject)
-					- if blocked_with_comment
+					- if kanban.blocked_with_comment?
 						- if comment_to_show = comments.last
 							%div.icon.icon-exclamation.blocker
 								= t('.blocked_by')

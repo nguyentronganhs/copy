@@ -7,6 +7,10 @@ class RedhopperIssue < ActiveRecord::Base
 
   validates :issue, uniqueness: true
 
+  def blocked_with_comment?
+    blocked?
+  end
+
   def blockers
     issue.relations_to.select {|ir| ir.relation_type == IssueRelation::TYPE_BLOCKS && !ir.issue_from.closed?}.map { |ir| ir.issue_from }
   end
@@ -24,7 +28,9 @@ class RedhopperIssue < ActiveRecord::Base
     issue.journals.visible.where("LENGTH(journals.notes) > 0")
   end
 
+  # Presenter
+
   def highlight_class
-    blocked_with_issues? ? 'highlight_warning' : blocking_issue? || blocked? ? 'highlight_danger' : ''
+    blocked_with_issues? ? 'highlight_warning' : blocking_issue? || blocked_with_comment? ? 'highlight_danger' : ''
   end
 end
