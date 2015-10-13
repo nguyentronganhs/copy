@@ -30,6 +30,25 @@ class RedhopperIssueTest < ActiveSupport::TestCase
     # Then
     assert_not result
   end
+
+  test "due delta is nil when no due date" do
+    # Given
+    redhopper_issue = RedhopperIssue.new issue: Issue.find(2)
+    # When
+    result = redhopper_issue.due_delta
+    # Then
+    assert_nil result
+  end
+
+  test "due delta returns returns a DueDeltaPresenter object when due date set" do
+    # Given
+    redhopper_issue = RedhopperIssue.new issue: Issue.find(1)
+    # When
+    result = redhopper_issue.due_delta
+    # Then
+    assert_instance_of DueDeltaPresenter, result
+  end
+
   # Presenter
 
   def test_highlight_class_when_not_blocked

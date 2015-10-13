@@ -42,18 +42,18 @@
 					- elsif sortable && comments.count > 0
 						= link_to block_redhopper_issue_path(id: kanban.id), method: :post, title: t('.block_with') + t('.last_note') do
 							= tag :img, src: '/plugin_assets/redhopper/images/exclamation-disabled.png', alt: t('.block_with') + t('.last_note')
-					- if (due_delta = (issue.due_before - Date.today).to_i unless issue.due_before.nil?)
-						.issue-due-before{title: due_delta > 0 ? t('.on_time') : t('.overdue'),class: ("overdue" unless due_delta > 0)}= "#{due_delta.abs}" + t('.due_unit')
-						.meta-data
-							- unless comments.empty?
-								%span.icon.icon-comment{title: t('.notes_count')}= comments.count
-							- unless issue.attachments.empty?
-								%span.icon.icon-attachment{title: t('.attachments_count')}= issue.attachments.count
-							- unless issue.assigned_to.nil?
-								%span.icon.icon-user{title: t('.assigned_user')}
-									%abbr{title: issue.assigned_to} #{issue.assigned_to.firstname.to_s.chars.first}#{issue.assigned_to.lastname.to_s.chars.first}
-							- unless issue.description.blank?
-								%span.icon.icon-issue{title: t('.description')}
+					- if due_delta = kanban.due_delta
+						.issue-due-before{title: t(due_delta.title) ,class: due_delta.css_class}= due_delta.abs_value + t('.due_unit')
+					.meta-data
+						- unless comments.empty?
+							%span.icon.icon-comment{title: t('.notes_count')}= comments.count
+						- unless issue.attachments.empty?
+							%span.icon.icon-attachment{title: t('.attachments_count')}= issue.attachments.count
+						- unless issue.assigned_to.nil?
+							%span.icon.icon-user{title: t('.assigned_user')}
+								%abbr{title: issue.assigned_to} #{issue.assigned_to.firstname.to_s.chars.first}#{issue.assigned_to.lastname.to_s.chars.first}
+						- unless issue.description.blank?
+							%span.icon.icon-issue{title: t('.description')}
 
 - if sortable
 	%hr{id: "kanban-#{kanban.id}-after"}

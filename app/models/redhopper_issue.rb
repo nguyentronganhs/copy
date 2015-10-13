@@ -32,6 +32,10 @@ class RedhopperIssue < ActiveRecord::Base
     persisted?
   end
 
+  def due_delta
+    issue.due_before ? DueDeltaPresenter.new(issue.due_before) : nil
+  end
+
   # Presenter
 
   def highlight_class
