@@ -13,8 +13,7 @@
 					- if first_kanban = column.sorted_issues.first
 						%hr{id: "kanban-#{first_kanban.id}-before"}
 					- last_kanban = column.sorted_issues.last
-					= render partial: 'kanban', collection: column.sorted_issues, locals: { sortable: true, column: column, first_kanban: first_kanban, last_kanban: last_kanban }
-
+					= render partial: 'kanban', collection: column.sorted_issues, locals: { column: column, first_kanban: first_kanban, last_kanban: last_kanban }
 				%h4
 					= t(".unsorted")
 				%ol

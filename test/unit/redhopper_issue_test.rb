@@ -13,6 +13,25 @@ class RedhopperIssueTest < ActiveSupport::TestCase
            :trackers,
            :projects_trackers
 
+  def test_sortable_in_sorted_zone
+    # Given
+    redhopper_issue = RedhopperIssue.create issue: Issue.find(1)
+    # When
+    result = redhopper_issue.sortable?
+    # Then
+    assert result
+  end
+
+  def test_unsortable_in_unsorted_zone
+    # Given
+    redhopper_issue = RedhopperIssue.new issue: Issue.find(1)
+    # When
+    result = redhopper_issue.sortable?
+    # Then
+    assert_not result
+  end
+  # Presenter
+
   def test_highlight_class_when_not_blocked
     # Given
     redhopper_issue = RedhopperIssue.new issue: Issue.find(1)

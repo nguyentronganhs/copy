@@ -1,4 +1,4 @@
-- sortable ||= false
+- sortable = kanban.sortable?
 - comments = kanban.comments
 - issue = kanban.issue
 %li{id: "issue-#{issue.id}-kanban-#{kanban.id}", draggable: sortable ? "true" : "false"}

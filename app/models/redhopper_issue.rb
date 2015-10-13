@@ -28,6 +28,10 @@ class RedhopperIssue < ActiveRecord::Base
     issue.journals.visible.where("LENGTH(journals.notes) > 0")
   end
 
+  def sortable?
+    persisted?
+  end
+
   # Presenter
 
   def highlight_class
