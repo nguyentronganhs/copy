@@ -12,9 +12,10 @@ class KanbanBoard
 			necessary_statuses << transition.new_status
 		end
 		statuses = statuses & necessary_statuses.uniq
+		statuses = statuses.select { |status| !status.is_closed?  } if Feature.enabled("only_open_statuses")
 
 		@columns = statuses.map do |status|
-			@columns_by_status[status] = Column.new status unless Feature.enabled("only_open_statuses") && status.is_closed?
+			@columns_by_status[status] = Column.new status
 		end.compact
 
 		project_issues = Issue.visible(User.current, :project => project)

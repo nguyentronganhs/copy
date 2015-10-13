@@ -1,10 +1,12 @@
 require File.expand_path('../../test_helper', __FILE__)
 
 class KanbanBoardTest < ActiveSupport::TestCase
+  fixtures :users
 
   setup do
     # Given
     Feature.stubs(:enabled).returns(false)
+    User.current = User.find 1
 
     Role.delete_all
     @dev = Role.create!(name: 'Dev')
@@ -25,7 +27,22 @@ class KanbanBoardTest < ActiveSupport::TestCase
     WorkflowTransition.create!(:role_id => @dev.id, :tracker_id => @story.id, :old_status_id => @todo.id, :new_status_id => @doing.id)
     WorkflowTransition.create!(:role_id => @dev.id, :tracker_id => @bug.id, :old_status_id => @doing.id, :new_status_id => @done.id)
 
-    @kanban_board = KanbanBoard.new Project.create!(name: 'Test Project', identifier: 'test-project')
+    Project.delete_all
+    @project = Project.create! name: 'Test Project', identifier: 'test-project'
+
+    IssuePriority.delete_all
+    @priority = IssuePriority.create! name:'Normal'
+
+    Issue.delete_all
+    @issue_todo = Issue.create!(subject: "Issue 1", project: @project, tracker: @story, status: @todo, priority: @priority, author: User.current)
+    @issue_doing = Issue.create!(subject: "Issue 1", project: @project, tracker: @story, status: @doing, priority: @priority, author: User.current)
+    @issue_done = Issue.create!(subject: "Issue 1", project: @project, tracker: @story, status: @done, priority: @priority, author: User.current)
+
+    RedhopperIssue.delete_all
+    @kanban_issue_doing = RedhopperIssue.create! issue: @issue_doing
+    @kanban_issue_done = RedhopperIssue.create! issue: @issue_done
+
+    @kanban_board = KanbanBoard.new @project.reload
   end
 
   test ".initialize with project" do
