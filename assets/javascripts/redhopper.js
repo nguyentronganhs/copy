@@ -64,15 +64,15 @@
 				e.stopPropagation(); // Stops some browsers from redirecting.
 			}
 
-			var issueToMove = $(dragSrcEl).attr('id').split('-')[1]
+			var kanbanToMove = $(dragSrcEl).attr('id').split('-')[3]
 			var targetComponents = $(this).attr('id').split('-')
-			var targetIssue = targetComponents[1]
+			var targetKanban = targetComponents[1]
 			var movePosition = targetComponents[2]
 			// Don't do anything if dropping the same column we're dragging.
-			if (issueToMove !== targetIssue) {
+			if (kanbanToMove !== targetKanban) {
 				$.post('/redhopper_issues/move', {
-					issue_id: issueToMove,
-					target_issue_id: targetIssue,
+					id: kanbanToMove,
+					target_id: targetKanban,
 					insert: movePosition
 				}, function () {
 					window.location.href = window.location.href;

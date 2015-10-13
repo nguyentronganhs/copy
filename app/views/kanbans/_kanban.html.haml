@@ -1,7 +1,7 @@
 - sortable ||= false
 - comments = kanban.comments
 - issue = kanban.issue
-%li{id: "issue-#{issue.id}", draggable: sortable ? "true" : "false"}
+%li{id: "issue-#{issue.id}-kanban-#{kanban.id}", draggable: sortable ? "true" : "false"}
 	/
 		Redmine needs a tr for its contextual menu.
 		So here is the whole table package…
@@ -13,14 +13,14 @@
 					.issue-id ##{issue.id}
 					- if sortable
 						.sortable
-							= link_to (tag :img, src: '/images/2uparrow.png', alt: t('.move2top_arrow')), move_redhopper_issue_path(issue_id: issue.id, target_issue_id: first_issue.id, insert: "before"), method: :post, title: t('.move2top') unless first_issue == issue
-							- previous_issue = kanban_counter == 0 ? nil : column.sorted_issues[kanban_counter - 1]
-							= link_to (tag :img, src: '/images/1uparrow.png', alt: t('.moveup_arrow')), move_redhopper_issue_path(issue_id: issue.id, target_issue_id: previous_issue.id, insert: "before"), method: :post, title: t('.moveup') unless previous_issue.nil?
-							- next_issue = column.sorted_issues[kanban_counter + 1]
-							= link_to (tag :img, src: '/images/1downarrow.png', alt: t('.moveup_arrow')), move_redhopper_issue_path(issue_id: issue.id, target_issue_id: next_issue.id, insert: "after"), method: :post, title: t('.movedown') unless next_issue.nil?
-							= link_to (tag :img, src: '/images/2downarrow.png', alt: t('.move2bottom_arrow')), move_redhopper_issue_path(issue_id: issue.id, target_issue_id: last_issue.id, insert: "after"), method: :post, title: t('.move2bottom') unless last_issue == issue
+							= link_to (tag :img, src: '/images/2uparrow.png', alt: t('.move2top_arrow')), move_redhopper_issue_path(id: kanban.id, target_id: first_kanban.id, insert: "before"), method: :post, title: t('.move2top') unless first_kanban == kanban
+							- previous_kanban = kanban_counter == 0 ? nil : column.sorted_issues[kanban_counter - 1]
+							= link_to (tag :img, src: '/images/1uparrow.png', alt: t('.moveup_arrow')), move_redhopper_issue_path(id: kanban.id, target_id: previous_kanban.id, insert: "before"), method: :post, title: t('.moveup') unless previous_kanban.nil?
+							- next_kanban = column.sorted_issues[kanban_counter + 1]
+							= link_to (tag :img, src: '/images/1downarrow.png', alt: t('.moveup_arrow')), move_redhopper_issue_path(id: kanban.id, target_id: next_kanban.id, insert: "after"), method: :post, title: t('.movedown') unless next_kanban.nil?
+							= link_to (tag :img, src: '/images/2downarrow.png', alt: t('.move2bottom_arrow')), move_redhopper_issue_path(id: kanban.id, target_id: last_kanban.id, insert: "after"), method: :post, title: t('.move2bottom') unless last_kanban == kanban
 							- if @can_unsort
-								= link_to (tag :img, src: '/images/bullet_diamond.png', alt: t('.goto_unsorted')), delete_redhopper_issue_path(issue_id: issue.id), method: :delete, title: t('.goto_unsorted')
+								= link_to (tag :img, src: '/images/bullet_diamond.png', alt: t('.goto_unsorted')), delete_redhopper_issue_path(id: kanban.id), method: :delete, title: t('.goto_unsorted')
 					- else
 						.unsortable
 							= link_to t('.goto_sorted'), create_redhopper_issue_path(issue_id: issue.id), method: :post
@@ -38,9 +38,9 @@
 									= link_to t('.last_note'), issue_path(issue, anchor: "note-#{issue.journals.visible.count}")
 									%span.tip
 										= textilizable(comment_to_show.notes)
-								= link_to t('.unblock'), unblock_redhopper_issue_path(issue_id: issue.id), method: :delete
-					- elsif comments.count > 0
-						= link_to block_redhopper_issue_path(issue_id: issue.id), method: :post, title: t('.block_with') + t('.last_note') do
+								= link_to t('.unblock'), unblock_redhopper_issue_path(id: kanban.id), method: :delete
+					- elsif sortable && comments.count > 0
+						= link_to block_redhopper_issue_path(id: kanban.id), method: :post, title: t('.block_with') + t('.last_note') do
 							= tag :img, src: '/plugin_assets/redhopper/images/exclamation-disabled.png', alt: t('.block_with') + t('.last_note')
 					- if (due_delta = (issue.due_before - Date.today).to_i unless issue.due_before.nil?)
 						.issue-due-before{title: due_delta > 0 ? t('.on_time') : t('.overdue'),class: ("overdue" unless due_delta > 0)}= "#{due_delta.abs}" + t('.due_unit')
@@ -55,4 +55,5 @@
 							- unless issue.description.blank?
 								%span.icon.icon-issue{title: t('.description')}
 
-%hr{id: "issue-#{issue.id}-after"}
+- if sortable
+	%hr{id: "kanban-#{kanban.id}-after"}

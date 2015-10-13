@@ -10,10 +10,10 @@
 				%h4
 					= t(".sorted")
 				%ol
-					- if first_issue = column.sorted_issues.first
-						%hr{id: "issue-#{first_issue.id}-before"}
-					- last_issue = column.sorted_issues.last
-					= render partial: 'kanban', collection: column.sorted_issues, locals: { sortable: true, column: column, first_issue: first_issue, last_issue: last_issue }
+					- if first_kanban = column.sorted_issues.first
+						%hr{id: "kanban-#{first_kanban.id}-before"}
+					- last_kanban = column.sorted_issues.last
+					= render partial: 'kanban', collection: column.sorted_issues, locals: { sortable: true, column: column, first_kanban: first_kanban, last_kanban: last_kanban }
 
 				%h4
 					= t(".unsorted")
