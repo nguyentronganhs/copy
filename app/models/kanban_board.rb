@@ -40,6 +40,8 @@ class KanbanBoard
 		end
 	end
 
+	private
+
 	def column_for_issue_status status
 		@columns_by_status[status]
 	end

@@ -97,7 +97,7 @@ class KanbanBoardTest < ActiveSupport::TestCase
     expected = @done
 
     # When
-    result = @kanban_board.column_for_issue_status expected
+    result = @kanban_board.send :column_for_issue_status, expected
 
     # Then
     assert_equal expected, result.issue_status
