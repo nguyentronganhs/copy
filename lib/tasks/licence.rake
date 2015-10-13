@@ -18,13 +18,24 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with Redhopper.  If not, see <http://www.gnu.org/licenses/>.
 #
-# Plugin's routes
-# See: http://guides.rubyonrails.org/routing.html
+namespace :redhopper do
+  desc "Inserts copyright and licence headers within code files"
+  task :headers do
+    require 'rubygems'
+    require 'copyright_header'
 
-get '/projects/:project_id/issues/kanbans', :to => 'kanbans#index', :as => 'project_kanbans'
+    args = {
+      license: 'AGPL3',
+      copyright_software: 'Redhopper',
+      copyright_software_description: "Kanban boards for Redmine, inspired by Jira Agile (formerly known as Greenhopper), but following its own path.",
+      copyright_holders: ['infoPiiaf <contact@infopiiaf.fr>'],
+      copyright_years: ['2015'],
+      add_path: './plugins/redhopper',
+      output_dir: './',
+      guess_extension: true
+    }
 
-post '/redhopper_issues', :to => 'redhopper_issues#create', :as => 'create_redhopper_issue'
-delete '/redhopper_issues', :to => 'redhopper_issues#delete', :as => 'delete_redhopper_issue'
-post '/redhopper_issues/move', :to => 'redhopper_issues#move', :as => 'move_redhopper_issue'
-post '/redhopper_issues/block', :to => 'redhopper_issues#block', :as => 'block_redhopper_issue'
-delete '/redhopper_issues/block', :to => 'redhopper_issues#unblock', :as => 'unblock_redhopper_issue'
+    command_line = CopyrightHeader::CommandLine.new( args )
+    command_line.execute
+  end
+end
