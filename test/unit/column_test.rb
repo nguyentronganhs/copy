@@ -81,4 +81,14 @@ class ColumnTest < ActiveSupport::TestCase
     assert_equal expected, result
   end
 
+  test ".work_in_progress returns the count of issues in both sections" do
+    # Given
+    @column << RedhopperIssue.new
+    @column << RedhopperIssue.create(issue: Issue.first)
+    # When
+    result = @column.work_in_progress
+    # Then
+    assert_equal 2, result
+  end
+
 end

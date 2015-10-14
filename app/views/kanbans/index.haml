@@ -26,7 +26,7 @@
 			%li
 				%h3
 					= column.issue_status.name
-					%small{title: t(".issues_count")} (#{column.sorted_issues.length + column.unsorted_issues.length})
+					%small{title: t(".issues_count")} (#{column.work_in_progress})
 				%h4
 					= t(".sorted")
 				%ol

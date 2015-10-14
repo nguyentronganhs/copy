@@ -146,6 +146,18 @@ class KanbanBoardTest < ActiveSupport::TestCase
     end
   end
 
+  test ".columns returns columns with the right number of kanbans" do
+    # Given
+    expected = [@todo, @doing, @done]
+    # When
+    result = subject.columns
+    # Then
+    expected.each_with_index do |status, index|
+      assert_equal status, result[index].issue_status
+      assert_equal 1, result[index].work_in_progress
+    end
+  end
+
   test ".column_for_issue_status returns the right column" do
     expected = @done
 

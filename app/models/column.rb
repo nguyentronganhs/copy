@@ -34,4 +34,8 @@ class Column
 		(issue.sortable? ? @sorted_issues : @unsorted_issues) << issue
 	end
 
+	def work_in_progress
+		@unsorted_issues.count + @sorted_issues.count
+	end
+
 end
