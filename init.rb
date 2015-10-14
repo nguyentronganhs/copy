@@ -22,7 +22,7 @@ Redmine::Plugin.register :redhopper do
   name 'Redhopper plugin'
   author 'infoPiiaf'
   description 'Kanban boards for Redmine, inspired by Jira Agile (formerly known as Greenhopper), but following its own path.'
-  version '0.10.5'
+  version '0.10.6'
   url 'https://git.framasoft.org/infopiiaf/redhopper.git'
   author_url 'http://www.infopiiaf.fr'
 
