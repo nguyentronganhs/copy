@@ -30,4 +30,8 @@ class Column
 		@sorted_issues = []
 	end
 
+	def << issue
+		(issue.sortable? ? @sorted_issues : @unsorted_issues) << issue
+	end
+
 end

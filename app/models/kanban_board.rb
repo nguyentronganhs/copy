@@ -32,17 +32,16 @@ class KanbanBoard
 
 		project_issues = issues
 
-		redhopper_issues = RedhopperIssue.ordered
-		redhopper_issues.each do |redhopper_issue|
+		RedhopperIssue.ordered.each do |redhopper_issue|
 			issue = redhopper_issue.issue
 			if project_issues.include?(issue)
-				column_for_issue_status(issue.status).sorted_issues << redhopper_issue
+				column_for_issue_status(issue.status) << redhopper_issue
 				project_issues.delete issue
 			end
 		end
 
 		project_issues.each do |issue|
-			column_for_issue_status(issue.status).unsorted_issues << RedhopperIssue.new(issue: issue)
+			column_for_issue_status(issue.status) << RedhopperIssue.new(issue: issue)
 		end
 	end
 

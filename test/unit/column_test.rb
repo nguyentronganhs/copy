@@ -21,6 +21,7 @@
 require File.expand_path('../../test_helper', __FILE__)
 
 class ColumnTest < ActiveSupport::TestCase
+  fixtures :issues
 
   setup do
     # Given
@@ -56,6 +57,26 @@ class ColumnTest < ActiveSupport::TestCase
     expected = []
     # When
     result = @column.sorted_issues
+    # Then
+    assert_equal expected, result
+  end
+
+  test ".<< adds Redhopper issues to unsorted section" do
+    # Given
+    kanban = RedhopperIssue.new
+    expected = [kanban]
+    # When
+    @column << kanban && result = @column.unsorted_issues
+    # Then
+    assert_equal expected, result
+  end
+
+  test ".<< adds sortable Redhopper issues to sorted section" do
+    # Given
+    kanban = RedhopperIssue.create issue: Issue.first
+    expected = [kanban]
+    # When
+    @column << kanban && result = @column.sorted_issues
     # Then
     assert_equal expected, result
   end
