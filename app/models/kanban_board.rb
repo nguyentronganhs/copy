@@ -26,18 +26,9 @@ class KanbanBoard
 		@project = project
 		@columns_by_status = {}
 
-		statuses = IssueStatus.sorted
-		necessary_statuses = []
-		WorkflowTransition.where(:tracker_id => tracker_ids, :role_id => Role.all.map(&:id)).each do |transition|
-			necessary_statuses << transition.old_status
-			necessary_statuses << transition.new_status
-		end
-		statuses = statuses & necessary_statuses.uniq
-		statuses = statuses.select { |status| !status.is_closed?  } if Feature.enabled("only_open_statuses")
-
 		@columns = statuses.map do |status|
 			@columns_by_status[status] = Column.new status
-		end.compact
+		end
 
 		project_issues = issues
 
@@ -73,6 +64,19 @@ class KanbanBoard
 		trackers_to_remove = (Setting.plugin_redhopper && Setting.plugin_redhopper["hidden_tracker_ids"] || []).map(&:to_i)
 
 		@project.trackers.map(&:id) - trackers_to_remove
+	end
+
+	def statuses
+		result = IssueStatus.sorted
+		result = result.where(is_closed: false) if Feature.enabled("only_open_statuses")
+
+		necessary_statuses = []
+		WorkflowTransition.where(:tracker_id => tracker_ids, :role_id => Role.all.map(&:id)).each do |transition|
+			necessary_statuses << transition.old_status
+			necessary_statuses << transition.new_status
+		end
+
+		result & necessary_statuses.uniq
 	end
 
 end
