@@ -23,6 +23,10 @@ require File.expand_path('../../test_helper', __FILE__)
 class KanbanBoardTest < ActiveSupport::TestCase
   fixtures :users
 
+  def subject
+    KanbanBoard.new @project
+  end
+
   setup do
     # Given
     Feature.stubs(:enabled).returns(false)
@@ -113,6 +117,22 @@ class KanbanBoardTest < ActiveSupport::TestCase
     end
   end
 
+  test ".columns returns only the necessary columns for displayed trackers" do
+    # Given
+    Setting.plugin_redhopper = { "hidden_tracker_ids" => [ @story.id.to_s ] }
+    expected = [@doing, @done]
+
+    # When
+    result = subject.columns
+
+    # Then
+    assert_equal expected.length, result.length
+    expected.each_with_index do |status, index|
+      assert_equal status, result[index].issue_status
+    end
+    Setting.plugin_redhopper = nil
+  end
+
   test ".columns returns only the columns for open statuses" do
     # Given
     Feature.stubs(:enabled).with("only_open_statuses").returns(true)
@@ -173,6 +193,28 @@ class KanbanBoardTest < ActiveSupport::TestCase
     expected = [@issue_todo, @issue_done]
     # When
     result = @kanban_board.send :issues
+    # Then
+    assert_equal expected, result
+    Setting.plugin_redhopper = nil
+  end
+
+  test ".trackers returns the project trackers" do
+    # Given
+    @project = Project.create!(name: 'Bugs Project', identifier: 'bugs-project', trackers: [@bug])
+    expected = [@bug.id]
+    # When
+    result = subject.send :tracker_ids
+    # Then
+    assert_equal expected, result
+  end
+
+  test ".trackers returns the project trackers except the hidden ones" do
+    # Given
+    Setting.plugin_redhopper = { "hidden_tracker_ids" => [ @story.id.to_s ] }
+    @project = Project.create!(name: 'Bugs Project', identifier: 'bugs-project', trackers: [@bug, @story])
+    expected = [@bug.id]
+    # When
+    result = subject.send :tracker_ids
     # Then
     assert_equal expected, result
     Setting.plugin_redhopper = nil

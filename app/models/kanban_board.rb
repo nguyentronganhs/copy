@@ -28,7 +28,7 @@ class KanbanBoard
 
 		statuses = IssueStatus.sorted
 		necessary_statuses = []
-		WorkflowTransition.where(:tracker_id => project.trackers.map(&:id), :role_id => Role.all.map(&:id)).each do |transition|
+		WorkflowTransition.where(:tracker_id => tracker_ids, :role_id => Role.all.map(&:id)).each do |transition|
 			necessary_statuses << transition.old_status
 			necessary_statuses << transition.new_status
 		end
@@ -64,13 +64,15 @@ class KanbanBoard
 	def issues
 		project_issues = Issue.visible(User.current, :project => @project)
 		project_issues = project_issues.open if Feature.enabled("only_open_statuses")
-
-		if Setting.plugin_redhopper && Setting.plugin_redhopper["hidden_tracker_ids"]
-			wanted_tracker_ids = Tracker.pluck(:id).map(&:to_s) - Setting.plugin_redhopper["hidden_tracker_ids"]
-			project_issues = project_issues.where(tracker: wanted_tracker_ids)
-		end
+		project_issues = project_issues.where(tracker_id: tracker_ids)
 
 		project_issues.to_a
+	end
+
+	def tracker_ids
+		trackers_to_remove = (Setting.plugin_redhopper && Setting.plugin_redhopper["hidden_tracker_ids"] || []).map(&:to_i)
+
+		@project.trackers.map(&:id) - trackers_to_remove
 	end
 
 end
