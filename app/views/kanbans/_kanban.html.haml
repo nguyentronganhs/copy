@@ -33,12 +33,14 @@
 					.issue-id ##{issue.id}
 					- if sortable
 						.sortable
-							= link_to (tag :img, src: '/images/2uparrow.png', alt: t('.move2top_arrow')), move_redhopper_issue_path(id: kanban.id, target_id: first_kanban.id, insert: "before"), method: :post, title: t('.move2top') unless first_kanban == kanban
-							- previous_kanban = kanban_counter == 0 ? nil : column.sorted_issues[kanban_counter - 1]
-							= link_to (tag :img, src: '/images/1uparrow.png', alt: t('.moveup_arrow')), move_redhopper_issue_path(id: kanban.id, target_id: previous_kanban.id, insert: "before"), method: :post, title: t('.moveup') unless previous_kanban.nil?
-							- next_kanban = column.sorted_issues[kanban_counter + 1]
-							= link_to (tag :img, src: '/images/1downarrow.png', alt: t('.moveup_arrow')), move_redhopper_issue_path(id: kanban.id, target_id: next_kanban.id, insert: "after"), method: :post, title: t('.movedown') unless next_kanban.nil?
-							= link_to (tag :img, src: '/images/2downarrow.png', alt: t('.move2bottom_arrow')), move_redhopper_issue_path(id: kanban.id, target_id: last_kanban.id, insert: "after"), method: :post, title: t('.move2bottom') unless last_kanban == kanban
+							- unless kanban_iteration.first?
+								= link_to (tag :img, src: '/images/2uparrow.png', alt: t('.move2top_arrow')), move_redhopper_issue_path(id: kanban.id, target_id: first_kanban.id, insert: "before"), method: :post, title: t('.move2top')
+								- previous_kanban = kanbans[kanban_iteration.index - 1]
+								= link_to (tag :img, src: '/images/1uparrow.png', alt: t('.moveup_arrow')), move_redhopper_issue_path(id: kanban.id, target_id: previous_kanban.id, insert: "before"), method: :post, title: t('.moveup')
+							- unless kanban_iteration.last?
+								- next_kanban = kanbans[kanban_iteration.index + 1]
+								= link_to (tag :img, src: '/images/1downarrow.png', alt: t('.moveup_arrow')), move_redhopper_issue_path(id: kanban.id, target_id: next_kanban.id, insert: "after"), method: :post, title: t('.movedown')
+								= link_to (tag :img, src: '/images/2downarrow.png', alt: t('.move2bottom_arrow')), move_redhopper_issue_path(id: kanban.id, target_id: last_kanban.id, insert: "after"), method: :post, title: t('.move2bottom')
 							- if @can_unsort
 								= link_to (tag :img, src: '/images/bullet_diamond.png', alt: t('.goto_unsorted')), delete_redhopper_issue_path(id: kanban.id), method: :delete, title: t('.goto_unsorted')
 					- else
