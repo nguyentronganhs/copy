@@ -36,7 +36,7 @@
 					= render partial: 'kanban', collection: column.sorted_issues, locals: { kanbans: column.sorted_issues, first_kanban: first_kanban, last_kanban: last_kanban }
 				%h4
 					= t(".unsorted")
-				%ol
+				%ul
 					= render partial: 'kanban', collection: column.unsorted_issues
 
 - content_for :header_tags do
