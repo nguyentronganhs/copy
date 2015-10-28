@@ -1,24 +1,3 @@
-/*
- * Redhopper - Kanban boards for Redmine, inspired by Jira Agile (formerly known as
- * Greenhopper), but following its own path.
- * Copyright (C) 2015 infoPiiaf <contact@infopiiaf.fr>
- *
- * This file is part of Redhopper.
- *
- * Redhopper is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as
- * published by the Free Software Foundation, either version 3 of the
- * License, or (at your option) any later version.
- *
- * Redhopper is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with Redhopper.  If not, see <http://www.gnu.org/licenses/>.
- */
-
 ol.kanban {
   margin: 0;
   padding: 0;
@@ -30,68 +9,68 @@ ol.kanban {
   /* Prevent the text contents of draggable elements from being selectable. */ }
   ol.kanban > li {
     margin: 0 1em; }
-    ol.kanban > li ol {
+    ol.kanban > li ol, ol.kanban > li ul {
       margin: 0;
       padding: 0;
       list-style: none;
       width: 20em; }
-      ol.kanban > li ol li {
+      ol.kanban > li ol li, ol.kanban > li ul li {
         margin: 0; }
-        ol.kanban > li ol li table {
+        ol.kanban > li ol li table, ol.kanban > li ul li table {
           display: block;
           width: 100%; }
-        ol.kanban > li ol li tbody {
+        ol.kanban > li ol li tbody, ol.kanban > li ul li tbody {
           display: block; }
-        ol.kanban > li ol li tr {
+        ol.kanban > li ol li tr, ol.kanban > li ul li tr {
           margin: 0;
           padding: 0;
           background-color: #ededed;
           border-radius: 2px;
           box-shadow: 0 1px 1px 0 #545454;
           display: block; }
-          ol.kanban > li ol li tr.highlight_danger {
+          ol.kanban > li ol li tr.highlight_danger, ol.kanban > li ul li tr.highlight_danger {
             background-color: #f5aeae; }
-          ol.kanban > li ol li tr.highlight_warning {
+          ol.kanban > li ol li tr.highlight_warning, ol.kanban > li ul li tr.highlight_warning {
             background-color: lightgoldenrodyellow; }
-          ol.kanban > li ol li tr td {
+          ol.kanban > li ol li tr td, ol.kanban > li ul li tr td {
             margin: 0;
             padding: 0;
             display: block; }
-            ol.kanban > li ol li tr td input[type=checkbox] {
+            ol.kanban > li ol li tr td input[type=checkbox], ol.kanban > li ul li tr td input[type=checkbox] {
               float: left;
               margin: 0 0 1em; }
-            ol.kanban > li ol li tr td .unsortable, ol.kanban > li ol li tr td .sortable {
+            ol.kanban > li ol li tr td .unsortable, ol.kanban > li ol li tr td .sortable, ol.kanban > li ul li tr td .unsortable, ol.kanban > li ul li tr td .sortable {
               float: right; }
-            ol.kanban > li ol li tr td p {
+            ol.kanban > li ol li tr td p, ol.kanban > li ul li tr td p {
               clear: both;
               margin: 0 0 1em; }
-              ol.kanban > li ol li tr td p.blocker {
+              ol.kanban > li ol li tr td p.blocker, ol.kanban > li ul li tr td p.blocker {
                 margin: 0.5em 1em; }
-                ol.kanban > li ol li tr td p.blocker span {
+                ol.kanban > li ol li tr td p.blocker span, ol.kanban > li ul li tr td p.blocker span {
                   text-decoration: underline dashed; }
-            ol.kanban > li ol li tr td .issue-id {
+            ol.kanban > li ol li tr td .issue-id, ol.kanban > li ul li tr td .issue-id {
               float: left; }
-            ol.kanban > li ol li tr td .issue-due-before {
+            ol.kanban > li ol li tr td .issue-due-before, ol.kanban > li ul li tr td .issue-due-before {
               float: left; }
-              ol.kanban > li ol li tr td .issue-due-before.overdue {
+              ol.kanban > li ol li tr td .issue-due-before.overdue, ol.kanban > li ul li tr td .issue-due-before.overdue {
                 color: red;
                 font-weight: bold; }
-            ol.kanban > li ol li tr td .meta-data {
+            ol.kanban > li ol li tr td .meta-data, ol.kanban > li ul li tr td .meta-data {
               float: right; }
-              ol.kanban > li ol li tr td .meta-data span {
+              ol.kanban > li ol li tr td .meta-data span, ol.kanban > li ul li tr td .meta-data span {
                 margin: 0 0 0 1em; }
-            ol.kanban > li ol li tr td:after {
+            ol.kanban > li ol li tr td:after, ol.kanban > li ul li tr td:after {
               content: "";
               display: block;
               clear: both; }
-      ol.kanban > li ol hr {
+      ol.kanban > li ol hr, ol.kanban > li ul hr {
         background-color: transparent;
         border: 2px dashed transparent;
         border-radius: 5px;
         height: 1em; }
-        ol.kanban > li ol hr[dropzone=move] {
+        ol.kanban > li ol hr[dropzone=move], ol.kanban > li ul hr[dropzone=move] {
           border-color: lightgray; }
-        ol.kanban > li ol hr.dragover {
+        ol.kanban > li ol hr.dragover, ol.kanban > li ul hr.dragover {
           background-color: lightgray; }
   ol.kanban [draggable] {
     -moz-user-select: none;
