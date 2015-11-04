@@ -22,6 +22,6 @@ We're (mostly) using CSS conventions inspired by [SMACSS](https://smacss.com/boo
  * `.Component-subcomponent`: `-` suffixed + lowercase noun;
 0. An HTML element may be a component and a subcomponent :
  * the _component_ class is for cosmetics;
- * the _subcomponent_ class is for positioning.
+ * the _subcomponent_ class is for positioning.
 
-For instance, a kanban board might use classes like `.KanbanBoard`, `.KanbanBoard-column`, `.Column`, `.Column-kanban`, `Kanban`, `Kanban.is-blocked`…
+For instance, a kanban board might use classes like `KanbanBoard`, `KanbanBoard-column`, `Column`, `Column-kanban`, `Kanban`, `Kanban.is-blocked`…
