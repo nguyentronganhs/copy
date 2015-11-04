@@ -1,85 +1,90 @@
-ol.kanban {
+.KanbanBoard {
   margin: 0;
   padding: 0;
   display: flex;
   flex-direction: row;
   list-style: none;
   overflow: scroll;
-  text-align: center;
-  /* Prevent the text contents of draggable elements from being selectable. */ }
-  ol.kanban > li {
-    margin: 0 1em; }
-    ol.kanban > li ol, ol.kanban > li ul {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      width: 20em; }
-      ol.kanban > li ol li, ol.kanban > li ul li {
-        margin: 0; }
-        ol.kanban > li ol li table, ol.kanban > li ul li table {
-          display: block;
-          width: 100%; }
-        ol.kanban > li ol li tbody, ol.kanban > li ul li tbody {
-          display: block; }
-        ol.kanban > li ol li tr, ol.kanban > li ul li tr {
-          margin: 0;
-          padding: 0;
-          background-color: #ededed;
-          border-radius: 2px;
-          box-shadow: 0 1px 1px 0 #545454;
-          display: block; }
-          ol.kanban > li ol li tr.highlight_danger, ol.kanban > li ul li tr.highlight_danger {
-            background-color: #f5aeae; }
-          ol.kanban > li ol li tr.highlight_warning, ol.kanban > li ul li tr.highlight_warning {
-            background-color: lightgoldenrodyellow; }
-          ol.kanban > li ol li tr td, ol.kanban > li ul li tr td {
-            margin: 0;
-            padding: 0;
-            display: block; }
-            ol.kanban > li ol li tr td input[type=checkbox], ol.kanban > li ul li tr td input[type=checkbox] {
-              float: left;
-              margin: 0 0 1em; }
-            ol.kanban > li ol li tr td .unsortable, ol.kanban > li ol li tr td .sortable, ol.kanban > li ul li tr td .unsortable, ol.kanban > li ul li tr td .sortable {
-              float: right; }
-            ol.kanban > li ol li tr td p, ol.kanban > li ul li tr td p {
-              clear: both;
-              margin: 0 0 1em; }
-              ol.kanban > li ol li tr td p.blocker, ol.kanban > li ul li tr td p.blocker {
-                margin: 0.5em 1em; }
-                ol.kanban > li ol li tr td p.blocker span, ol.kanban > li ul li tr td p.blocker span {
-                  text-decoration: underline dashed; }
-            ol.kanban > li ol li tr td .issue-id, ol.kanban > li ul li tr td .issue-id {
-              float: left; }
-            ol.kanban > li ol li tr td .issue-due-before, ol.kanban > li ul li tr td .issue-due-before {
-              float: left; }
-              ol.kanban > li ol li tr td .issue-due-before.overdue, ol.kanban > li ul li tr td .issue-due-before.overdue {
-                color: red;
-                font-weight: bold; }
-            ol.kanban > li ol li tr td .meta-data, ol.kanban > li ul li tr td .meta-data {
-              float: right; }
-              ol.kanban > li ol li tr td .meta-data span, ol.kanban > li ul li tr td .meta-data span {
-                margin: 0 0 0 1em; }
-            ol.kanban > li ol li tr td:after, ol.kanban > li ul li tr td:after {
-              content: "";
-              display: block;
-              clear: both; }
-      ol.kanban > li ol hr, ol.kanban > li ul hr {
-        background-color: transparent;
-        border: 2px dashed transparent;
-        border-radius: 5px;
-        height: 1em; }
-        ol.kanban > li ol hr[dropzone=move], ol.kanban > li ul hr[dropzone=move] {
-          border-color: lightgray; }
-        ol.kanban > li ol hr.dragover, ol.kanban > li ul hr.dragover {
-          background-color: lightgray; }
-  ol.kanban [draggable] {
-    -moz-user-select: none;
-    -khtml-user-select: none;
-    -webkit-user-select: none;
-    user-select: none;
-    /* Required to make elements draggable in old WebKit */
-    -khtml-user-drag: element;
-    -webkit-user-drag: element; }
+  text-align: center; }
+  .KanbanBoard-column {
+    margin: 0 1em;
+    /* width property is ignored in flexbox */
+    max-width: 20em;
+    min-width: 20em; }
+  .KanbanBoard ol, .KanbanBoard ul {
+    margin: 0;
+    padding: 0;
+    list-style: none; }
+
+.Column-dropzone {
+  background-color: transparent;
+  border: 2px dashed transparent;
+  border-radius: 5px;
+  height: 1em; }
+  .Column-dropzone[dropzone=move] {
+    border-color: lightgray; }
+  .Column-dropzone.dragover {
+    background-color: lightgray; }
+
+.Kanban {
+  margin: 0; }
+  .Kanban table {
+    display: block;
+    width: 100%; }
+  .Kanban tbody {
+    display: block; }
+  .Kanban tr {
+    margin: 0;
+    padding: 0;
+    background-color: #ededed;
+    border-radius: 2px;
+    box-shadow: 0 1px 1px 0 #545454;
+    display: block; }
+    .Kanban tr.highlight_danger {
+      background-color: #f5aeae; }
+    .Kanban tr.highlight_warning {
+      background-color: lightgoldenrodyellow; }
+  .Kanban td {
+    margin: 0;
+    padding: 0;
+    display: block; }
+    .Kanban td:after {
+      content: "";
+      display: block;
+      clear: both; }
+  .Kanban input[type=checkbox] {
+    float: left;
+    margin: 0 0 1em; }
+  .Kanban .unsortable, .Kanban .sortable {
+    float: right; }
+  .Kanban p {
+    clear: both;
+    margin: 0 0 1em; }
+    .Kanban p.blocker {
+      margin: 0.5em 1em; }
+      .Kanban p.blocker span {
+        text-decoration: underline dashed; }
+  .Kanban .issue-id {
+    float: left; }
+  .Kanban .issue-due-before {
+    float: left; }
+    .Kanban .issue-due-before.overdue {
+      color: red;
+      font-weight: bold; }
+  .Kanban .meta-data {
+    float: right; }
+    .Kanban .meta-data span {
+      margin: 0 0 0 1em; }
+
+/* Prevent the text contents of draggable elements from being selectable. */
+[draggable] {
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  /* Required to make elements draggable in old WebKit */
+  -khtml-user-drag: element;
+  -webkit-user-drag: element; }
 
 .icon-exclamation {
   background-image: url(../../../images/exclamation.png); }

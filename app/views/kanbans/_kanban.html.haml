@@ -21,7 +21,7 @@
 - sortable = kanban.sortable?
 - comments = kanban.comments
 - issue = kanban.issue
-%li{id: "issue-#{issue.id}-kanban-#{kanban.id}", draggable: sortable ? "true" : "false"}
+%li{id: "issue-#{issue.id}-kanban-#{kanban.id}", class: 'Kanban', draggable: sortable ? "true" : "false"}
 	/
 		Redmine needs a tr for its contextual menu.
 		So here is the whole table package…
@@ -77,4 +77,4 @@
 						- unless issue.description.blank?
 							%span.icon.icon-issue{title: t('.description')}
 
-%hr{id: "kanban-#{kanban.id}-after"}
+%hr{id: "kanban-#{kanban.id}-after", class: 'Column-dropzone'}

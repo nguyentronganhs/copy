@@ -21,9 +21,9 @@
 %h2 Kanbans
 
 %form
-	%ol.kanban
+	%ol.KanbanBoard
 		- @kanban_board.columns.each do |column|
-			%li
+			%li.KanbanBoard-column.Column
 				%h3
 					= column.issue_status.name
 					%small{title: t(".issues_count")} (#{column.work_in_progress})
@@ -31,7 +31,7 @@
 					= t(".sorted")
 				%ol
 					- if first_kanban = column.sorted_issues.first
-						%hr{id: "kanban-#{first_kanban.id}-before"}
+						%hr{id: "kanban-#{first_kanban.id}-before", class:'Column-dropzone'}
 					- last_kanban = column.sorted_issues.last
 					= render partial: 'kanban', collection: column.sorted_issues, locals: { kanbans: column.sorted_issues, first_kanban: first_kanban, last_kanban: last_kanban }
 				%h4

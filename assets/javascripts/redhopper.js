@@ -21,7 +21,8 @@
 
 (function ($) {
 	$(function () {
-		$("ol.kanban").height(Math.max(document.documentElement.clientHeight, window.innerHeight || 0) - $("ol.kanban").offset().top - 10);
+		var $kanbanBoard = $(".KanbanBoard")
+		$kanbanBoard.height(Math.max(document.documentElement.clientHeight, window.innerHeight || 0) - $kanbanBoard.offset().top - 10);
 		var dragSrcEl;
 		var dragSrcList;
 		var dropzones;
@@ -103,7 +104,7 @@
 			return false;
 		}
 
-		var issues = document.querySelectorAll('ol.kanban [draggable]');
+		var issues = $kanbanBoard.find('[draggable]');
 		[].forEach.call(issues, function(col) {
 			col.addEventListener('dragstart', handleDragStart, false);
 			col.addEventListener('dragend', handleDragEnd, false);

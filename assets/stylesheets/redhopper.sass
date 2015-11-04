@@ -4,7 +4,7 @@ $gutter: 1em
 	margin: $margin
 	padding: $padding
 
-ol.kanban
+.KanbanBoard
 	+space(0)
 
 	display: flex
@@ -13,103 +13,108 @@ ol.kanban
 	overflow: scroll
 	text-align: center
 
-	& > li
+	&-column
 		margin: 0 $gutter
+		/* width property is ignored in flexbox */
+		max-width: 20em
+		min-width: 20em
 
-		ol, ul
-			+space(0)
+	ol, ul
+		+space(0)
 
-			list-style: none
-			width: 20em
+		list-style: none
 
-			li
-				margin: 0
+.Column
 
-				table
-					display: block
-					width: 100%
+	&-dropzone
+		background-color: transparent
+		border: 2px dashed transparent
+		border-radius: 5px
+		height: $gutter
 
-				tbody
-					display: block
+		&[dropzone=move]
+			border-color: lightgray
 
-				tr
-					+space(0)
+		&.dragover
+			background-color: lightgray
 
-					background-color: lighten(lightgray, 10%)
-					border-radius: 2px
-					box-shadow: 0 1px 1px 0 darken(lightgray, 50%)
-					display: block
+.Kanban
+	margin: 0
 
-					&.highlight_danger
-						background-color: lighten(lightcoral, 10%)
+	table
+		display: block
+		width: 100%
 
-					&.highlight_warning
-						background-color: lightgoldenrodyellow
+	tbody
+		display: block
 
-					td
-						+space(0)
+	tr
+		+space(0)
 
-						display: block
+		background-color: lighten(lightgray, 10%)
+		border-radius: 2px
+		box-shadow: 0 1px 1px 0 darken(lightgray, 50%)
+		display: block
 
-						input[type=checkbox]
-							float: left
-							margin: 0 0 $gutter
+		&.highlight_danger
+			background-color: lighten(lightcoral, 10%)
 
-						.unsortable, .sortable
-							float: right
+		&.highlight_warning
+			background-color: lightgoldenrodyellow
 
-						p
-							clear: both
-							margin: 0 0 $gutter
+	td
+		+space(0)
 
-							&.blocker
-								margin: $gutter / 2 $gutter
+		display: block
 
-								span
-									text-decoration: underline dashed
+		&:after
+			content: ""
+			display: block
+			clear: both
 
-						.issue-id
-							float: left
 
-						.issue-due-before
-							float: left
+	input[type=checkbox]
+		float: left
+		margin: 0 0 $gutter
 
-							&.overdue
-								color: red
-								font-weight: bold
+	.unsortable, .sortable
+		float: right
 
-						.meta-data
-							float: right
+	p
+		clear: both
+		margin: 0 0 $gutter
 
-							span
-								margin: 0 0 0 $gutter
+		&.blocker
+			margin: $gutter / 2 $gutter
 
-						&:after
-							content: ""
-							display: block
-							clear: both
+			span
+				text-decoration: underline dashed
 
-			hr
-				background-color: transparent
-				border: 2px dashed transparent
-				border-radius: 5px
-				height: $gutter
+	.issue-id
+		float: left
 
-				&[dropzone=move]
-					border-color: lightgray
+	.issue-due-before
+		float: left
 
-				&.dragover
-					background-color: lightgray
+		&.overdue
+			color: red
+			font-weight: bold
 
-	/* Prevent the text contents of draggable elements from being selectable. */
-	[draggable]
-		-moz-user-select: none
-		-khtml-user-select: none
-		-webkit-user-select: none
-		user-select: none
-		/* Required to make elements draggable in old WebKit */
-		-khtml-user-drag: element
-		-webkit-user-drag: element
+	.meta-data
+		float: right
+
+		span
+			margin: 0 0 0 $gutter
+
+/* Prevent the text contents of draggable elements from being selectable. */
+[draggable]
+	-moz-user-select: none
+	-khtml-user-select: none
+	-webkit-user-select: none
+	user-select: none
+	/* Required to make elements draggable in old WebKit */
+	-khtml-user-drag: element
+	-webkit-user-drag: element
 
 .icon-exclamation
 	background-image: url(../../../images/exclamation.png)

@@ -54,11 +54,13 @@ class KanbansControllerTest < ActionController::TestCase
     @priority = IssuePriority.create! name:'Normal'
 
     Issue.delete_all
+		@issue_idea = Issue.create!(subject: "Issue 4", project: @project, tracker: @story, status: @todo, priority: @priority, author: User.current)
     @issue_todo = Issue.create!(subject: "Issue 3", project: @project, tracker: @story, status: @todo, priority: @priority, author: User.current)
     @issue_doing = Issue.create!(subject: "Issue 2", project: @project, tracker: @bug, status: @doing, priority: @priority, author: User.current)
     @issue_done = Issue.create!(subject: "Issue 1", project: @project, tracker: @story, status: @done, priority: @priority, author: User.current)
 
     RedhopperIssue.delete_all
+		@kanban_issue_todo = RedhopperIssue.create! issue: @issue_todo
     @kanban_issue_doing = RedhopperIssue.create! issue: @issue_doing
     @kanban_issue_done = RedhopperIssue.create! issue: @issue_done
 	end
@@ -66,17 +68,20 @@ class KanbansControllerTest < ActionController::TestCase
 	def test_index
 		get :index, :project_id => @project.id
 
-		assert_not_nil assigns['kanban_board']
-		expected_columns = assigns['kanban_board'].columns
-
 		assert_response :success
 		assert_template 'index'
+
+		assert_not_nil assigns['kanban_board']
+	end
+
+	def test_index_board_structure
+		get :index, :project_id => @project.id
 
 		assert_select columns, 3 do |columns|
 			todo_column, doing_column, done_column = columns
 
-			assert_select todo_column, column_heading, "To do\n(1)"
-			assert_select todo_column, sorted_column_cards, 0
+			assert_select todo_column, column_heading, "To do\n(2)"
+			assert_select todo_column, sorted_column_cards, 1
 			assert_select todo_column, unsorted_column_cards, 1
 
 			assert_select doing_column, column_heading, "Doing\n(1)"
@@ -92,7 +97,7 @@ class KanbansControllerTest < ActionController::TestCase
 	private
 
 	def columns
-		'ol.kanban > li'
+		'.Column'
 	end
 
 	def column_heading
@@ -100,10 +105,10 @@ class KanbansControllerTest < ActionController::TestCase
 	end
 
 	def sorted_column_cards
-		'h4 + ol li'
+		'ol .Kanban'
 	end
 
 	def unsorted_column_cards
-		'h4 + ul li'
+		'ul .Kanban'
 	end
 end
