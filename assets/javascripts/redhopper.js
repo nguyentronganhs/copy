@@ -32,15 +32,18 @@
 			this.style.opacity = '0.6';  // this / e.target is the source node.
 
 			dragSrcEl = this;
-			dragSrcList = $(this).parents('ol').first();
-			dropzones = $(dragSrcList).children('hr');
+			before_dz_to_exclude = $(this).prev('hr');
+			after_dz_to_exclude = $(this).next('hr');
+			dragSrcList = $(this).closest('ol');
+			dropzones = $(dragSrcList).children('hr').not(before_dz_to_exclude).not(after_dz_to_exclude);
+			console.log(dropzones);
 
 			dropzones.attr('dropzone', 'move');
-			[].forEach.call(dropzones, function(col) {
-				col.addEventListener('dragenter', handleDragEnter, false)
-				col.addEventListener('dragover', handleDragOver, false);
-				col.addEventListener('dragleave', handleDragLeave, false);
-				col.addEventListener('drop', handleDrop, false);
+			[].forEach.call(dropzones, function(dz) {
+				dz.addEventListener('dragenter', handleDragEnter, false)
+				dz.addEventListener('dragover', handleDragOver, false);
+				dz.addEventListener('dragleave', handleDragLeave, false);
+				dz.addEventListener('drop', handleDrop, false);
 			});
 
 			e.dataTransfer.effectAllowed = 'move';
