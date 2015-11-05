@@ -36,7 +36,6 @@
 			after_dz_to_exclude = $(this).next('hr');
 			dragSrcList = $(this).closest('ol');
 			dropzones = $(dragSrcList).children('hr').not(before_dz_to_exclude).not(after_dz_to_exclude);
-			console.log(dropzones);
 
 			dropzones.attr('dropzone', 'move');
 			[].forEach.call(dropzones, function(dz) {
