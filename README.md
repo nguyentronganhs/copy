@@ -13,6 +13,7 @@ No need to define columns, your issue statuses are good enough. No need to defin
 ## How does it work?
 
 1. [Install the plugin](http://www.redmine.org/projects/redmine/wiki/Plugins#Installing-a-plugin)
+  - Make sure the plugin directory name is exactly `redhopper`
   - Redhopper has migrations so you will have to run step 2
   - between steps 1 and 2, install the missing gems with `bundle install`
 2. Activate the *Kanbans* module in your project configuration.
