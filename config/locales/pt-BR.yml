@@ -30,8 +30,8 @@ pt-BR:
     kanbans:
       configuration:
         title: "Configuração"
-        displayed_trackers:
-          title: "Trackers exibidos"
+        hidden_trackers:
+          title: "Trackers escondidos"
       feature_switches:
         title: "Trocar recursos"
     feature:

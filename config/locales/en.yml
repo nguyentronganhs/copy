@@ -30,8 +30,8 @@ en:
     kanbans:
       configuration:
         title: "Configuration"
-        displayed_trackers:
-          title: "Displayed trackers"
+        hidden_trackers:
+          title: "Hidden trackers"
       feature_switches:
         title: "Feature switches"
     feature:
