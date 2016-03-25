@@ -31,7 +31,7 @@
           = check_box_tag "settings[hidden_tracker_ids][]", tracker.id, Setting.plugin_redhopper.present? && Setting.plugin_redhopper["hidden_tracker_ids"].present? ? Setting.plugin_redhopper["hidden_tracker_ids"].include?(tracker.id.to_s) : false
           = tracker.name
 
-- features = ["move_back_to_unsorted", "only_open_statuses"]
+- features = ["hide_tracker_name", "move_back_to_unsorted", "only_open_statuses"]
 %h3
   = t('.feature_switches.title')
 

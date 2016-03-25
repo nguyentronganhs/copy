@@ -41,3 +41,6 @@ pt-BR:
       only_open_statuses:
         title: "Apenas status aberto"
         description: "Mostrar apenas colunas para estados abertos."
+      hide_tracker_name:
+        title: "Esconder o nome do tracker"
+        description: "Não exibe o título do tracker ao lado do número do pedido"

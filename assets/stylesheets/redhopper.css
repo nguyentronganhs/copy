@@ -65,7 +65,8 @@
       .Kanban p.blocker span {
         text-decoration: underline dashed; }
   .Kanban .issue-id {
-    float: left; }
+    float: left;
+    margin-left: 0.2em; }
   .Kanban .issue-due-before {
     float: left; }
     .Kanban .issue-due-before.overdue {

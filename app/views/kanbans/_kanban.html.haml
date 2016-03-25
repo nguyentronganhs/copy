@@ -30,7 +30,9 @@
 			%tr.hascontextmenu{class: kanban.highlight_class }
 				%td
 					%input{type: "checkbox", name: "ids[]", value: issue.id}
-					.issue-id ##{issue.id}
+					.issue-id
+						= issue.tracker.name unless @hide_tracker
+						= "##{issue.id}"
 					- if sortable
 						.sortable
 							- unless kanban_iteration.first?

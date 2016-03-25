@@ -41,3 +41,6 @@ fr:
       only_open_statuses:
         title: "Uniquement les statuts ouverts"
         description: "N'affiche pas les colonnes associées à des statuts fermés."
+      hide_tracker_name:
+        title: "Masquer le tracker"
+        description: "N'affiche pas l'intitulé du tracker à côté du numéro de la demande"
