@@ -61,4 +61,8 @@ class RedhopperIssue < ActiveRecord::Base
   def highlight_class
     blocked_with_issues? ? 'highlight_warning' : blocking_issue? || blocked_with_comment? ? 'highlight_danger' : ''
   end
+
+  def tracker_color
+    "##{Digest::SHA1.hexdigest(issue.tracker.id.to_s)[0..5]}"
+  end
 end

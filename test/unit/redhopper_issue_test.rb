@@ -177,4 +177,14 @@ class RedhopperIssueTest < ActiveSupport::TestCase
     assert_equal 'highlight_warning', result
   end
 
+  def test_automatically_generates_color_regarding_associated_tracker
+    # Given
+    redhopper_issue = RedhopperIssue.new issue: Issue.find(1)
+    redhopper_issue.issue.tracker.stubs(:id).returns(42)
+    # when
+    result = redhopper_issue.tracker_color
+    # Then
+    assert_equal '#92cfce', result
+  end
+
 end

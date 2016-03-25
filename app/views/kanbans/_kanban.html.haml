@@ -21,16 +21,17 @@
 - sortable = kanban.sortable?
 - comments = kanban.comments
 - issue = kanban.issue
+- color = kanban.tracker_color
 %li{id: "issue-#{issue.id}-kanban-#{kanban.id}", class: 'Kanban', draggable: sortable ? "true" : "false"}
 	/
 		Redmine needs a tr for its contextual menu.
 		So here is the whole table package…
 	%table
 		%tbody
-			%tr.hascontextmenu{class: kanban.highlight_class }
+			%tr.hascontextmenu{class: kanban.highlight_class, style: "border-top: 3px solid #{color}"}
 				%td
 					%input{type: "checkbox", name: "ids[]", value: issue.id}
-					.issue-id
+					.issue-id{style: "color:#{color}"}
 						= issue.tracker.name unless @hide_tracker
 						= "##{issue.id}"
 					- if sortable
