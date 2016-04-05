@@ -41,3 +41,6 @@ en:
       only_open_statuses:
         title: "Only open statuses"
         description: "Only displays columns for open statuses."
+      hide_tracker_name:
+        title: "Hide tracker's name"
+        description: "Do not display the name of the tracker of an issue on the Kanban."
