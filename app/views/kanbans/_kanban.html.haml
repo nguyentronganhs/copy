@@ -76,7 +76,7 @@
 							%span.icon.icon-attachment{title: t('.attachments_count')}= issue.attachments.count
 						- unless issue.assigned_to.nil?
 							%span.icon.icon-user{title: t('.assigned_user')}
-								%abbr{title: issue.assigned_to} #{issue.assigned_to.firstname.to_s.chars.first}#{issue.assigned_to.lastname.to_s.chars.first}
+								%abbr{title: issue.assigned_to} #{issue.assigned_to.name}
 						- unless issue.description.blank?
 							%span.icon.icon-issue{title: t('.description')}
 
