@@ -32,15 +32,19 @@ class RedhopperIssue < ActiveRecord::Base
   end
 
   def blockers
-    issue.relations_to.select {|ir| ir.relation_type == IssueRelation::TYPE_BLOCKS && !ir.issue_from.closed?}.map { |ir| ir.issue_from }
+    issue.relations_to.select {|ir| ir.relation_type == IssueRelation::TYPE_BLOCKS && ir.other_issue(issue).visible?}.map { |ir| ir.issue_from }
   end
 
   def blocked_with_issues?
     blockers.present?
   end
 
+  def blocked_issues
+    issue.relations_from.select {|ir| ir.relation_type == IssueRelation::TYPE_BLOCKS && ir.other_issue(issue).visible?}.map { |ir| ir.issue_to }
+  end
+
   def blocking_issue?
-    issue.relations_from.detect {|ir| ir.relation_type == IssueRelation::TYPE_BLOCKS && !ir.issue_to.closed?}
+    blocked_issues.present?
   end
 
   def comments
