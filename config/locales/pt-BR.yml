@@ -19,7 +19,8 @@ pt-BR:
       attachments_count: "Anexar contador."
       assigned_user: "Atribuir usuário."
       description: "Descrição preenchida."
-      blocked_by: 'Bolquear para '
+      blocks: 'Bloqueia '
+      blocked_by: 'Bloquear para '
       block_with: 'Bloquear com '
       last_note: 'ultima nota.'
       unblock: 'Desbloquear.'

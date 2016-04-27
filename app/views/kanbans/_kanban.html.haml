@@ -50,6 +50,11 @@
 						.unsortable
 							= link_to t('.goto_sorted'), create_redhopper_issue_path(issue_id: issue.id), method: :post
 					%p= link_to issue.subject, issue
+					- if kanban.blocking_issue?
+						- kanban.blocked_issues.each do |blocker|
+							%p.icon.icon-exclamation.blocker
+								= t('.blocks')
+								= link_to("##{blocker.id}.", blocker, title: blocker.subject)
 					- if kanban.blocked_with_issues?
 						- kanban.blockers.each do |blocker|
 							%p.icon.icon-exclamation.blocker

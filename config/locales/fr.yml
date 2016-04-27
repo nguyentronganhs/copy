@@ -19,6 +19,7 @@ fr:
       attachments_count: "Nombre de fichiers joints."
       assigned_user: "Personne assignée."
       description: "Description remplie."
+      blocks: 'Bloque '
       blocked_by: "Bloquée par "
       block_with: 'Bloquer avec '
       last_note: 'la dernière note.'

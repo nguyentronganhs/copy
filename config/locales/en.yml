@@ -19,6 +19,7 @@ en:
       attachments_count: "Attachments count."
       assigned_user: "User assigned."
       description: "Description filled in."
+      blocks: 'Blocks '
       blocked_by: 'Blocked by '
       block_with: 'Block with '
       last_note: 'last note.'
