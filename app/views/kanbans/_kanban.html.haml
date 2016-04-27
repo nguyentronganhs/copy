@@ -70,14 +70,14 @@
 					- if due_delta = kanban.due_delta
 						.issue-due-before{title: t(due_delta.title) ,class: due_delta.css_class}= due_delta.abs_value + t('.due_unit')
 					.meta-data
+						- unless issue.description.blank?
+							%span.icon.icon-issue{title: t('.description')}
 						- unless comments.empty?
 							%span.icon.icon-comment{title: t('.notes_count')}= comments.count
 						- unless issue.attachments.empty?
 							%span.icon.icon-attachment{title: t('.attachments_count')}= issue.attachments.count
-						- unless issue.assigned_to.nil?
+						- unless (assignee = issue.assigned_to).nil?
 							%span.icon.icon-user{title: t('.assigned_user')}
-								%abbr{title: issue.assigned_to} #{issue.assigned_to.firstname.to_s.chars.first}#{issue.assigned_to.lastname.to_s.chars.first}
-						- unless issue.description.blank?
-							%span.icon.icon-issue{title: t('.description')}
+								= Setting.gravatar_enabled? ? avatar(assignee, title: assignee) : assignee
 
 %hr{id: "kanban-#{kanban.id}-after", class: 'Column-dropzone'}

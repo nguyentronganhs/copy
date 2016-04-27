@@ -76,6 +76,9 @@
     float: right; }
     .Kanban .meta-data span {
       margin: 0 0 0 1em; }
+      .Kanban .meta-data span.icon-user img.gravatar {
+        width: 32px;
+        height: 32px; }
 
 /* Prevent the text contents of draggable elements from being selectable. */
 [draggable] {
