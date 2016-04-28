@@ -45,9 +45,9 @@ bundle exec rake redmine:plugins:test NAME=redhopper
 
 #### SASS
 
-Unfortunately Redmine does not use SASS (yet) but we use it to develop Redhopper. If you want to perform modifications on the CSS, you will **have to** run the SASS compiler after modifying the SASS file. To do so, just run in Redhopper directory:
+Unfortunately Redmine does not use SASS (yet) but we use it to develop Redhopper. If you want to perform modifications on the CSS, you will **have to** run the SASS compiler after modifying the SASS file. To do so, just run in **Redmine** directory:
 ```
-bundle exec sass --watch assets/stylesheets:assets/stylesheets
+bundle exec sass --watch plugins/redhopper/assets/stylesheets:plugins/redhopper/assets/stylesheets
 ```
 This way, the `sass` executable will watch for every changes in `.sass` files and compile the matching CSS file. Don't forget to commit both the SASS and CSS files when you're happy with your work.
 
