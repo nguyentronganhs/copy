@@ -45,3 +45,6 @@ pt-BR:
       hide_tracker_name:
         title: "Esconder o nome do tracker"
         description: "Não exibe o título do tracker ao lado do número do pedido"
+      display_description_tooltip:
+        title: "Description as tooltip <translation needed>"
+        description: "Displays the formated description as a tooltip. <translation needed>"

@@ -45,3 +45,6 @@ fr:
       hide_tracker_name:
         title: "Masquer le tracker"
         description: "N'affiche pas l'intitulé du tracker à côté du numéro de la demande"
+      display_description_tooltip:
+        title: "Description en infobulle"
+        description: "Affiche la description en infobulle et formattée."

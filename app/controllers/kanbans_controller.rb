@@ -27,6 +27,7 @@ class KanbansController < ApplicationController
     @kanban_board = KanbanBoard.new @project
     @can_unsort = Feature.enabled "move_back_to_unsorted"
     @hide_tracker = Feature.enabled "hide_tracker_name"
+    @description_tooltip = Feature.enabled "display_description_tooltip"
   end
 
 end
