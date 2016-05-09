@@ -65,3 +65,6 @@ en:
       hide_tracker_name:
         title: "Hide tracker's name"
         description: "Do not display the name of the tracker of an issue on the Kanban."
+      display_description_tooltip:
+        title: "Description as tooltip"
+        description: "Displays the formated description as a tooltip."

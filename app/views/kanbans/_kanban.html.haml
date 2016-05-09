@@ -75,8 +75,14 @@
 					- if due_delta = kanban.due_delta
 						.issue-due-before{title: t(due_delta.title) ,class: due_delta.css_class}= due_delta.abs_value + t('.due_unit')
 					.meta-data
-						- unless issue.description.blank?
-							%span.icon.icon-issue{title: t('.description')}
+						- unless (desc = issue.description).blank?
+							- if @description_tooltip
+								%div.tooltip{style: 'display:inline-block;'}
+									= link_to '<span class="icon icon-issue"></span>'.html_safe, '#'
+									%span.tip
+										= textilizable(desc)
+							- else
+								%span.icon.icon-issue{title: t('.description')}
 						- unless comments.empty?
 							%span.icon.icon-comment{title: t('.notes_count')}= comments.count
 						- unless issue.attachments.empty?
